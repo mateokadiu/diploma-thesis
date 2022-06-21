@@ -1,0 +1,61 @@
+<form [formGroup]="loginForm" class="center-content">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title class="mat-card-header">Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-input
+        label="Email"
+        inputType="email"
+        iconName="email"
+        [control]="getControl('email')"
+      ></app-input>
+
+      <mat-form-field class="full-width">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon matSuffix>{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">
+          Password should be with <strong>at least 10 characters</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="
+            loginForm.controls['password'].hasError('pattern') &&
+            !loginForm.controls['password'].hasError('minlength')
+          "
+        >
+          Password must contain a <strong>symbol</strong>,
+          <strong>number</strong>, <strong>uppercase letter</strong> and
+          <strong>lowercase letter</strong>.
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-button
+        color="primary"
+        (click)="onSubmit()"
+        [disabled]="loginForm.pristine || loginForm.invalid"
+      >
+        Login
+      </button>
+    </mat-card-content>
+  </mat-card>
+</form>

@@ -1,0 +1,16 @@
+<mat-form-field>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    [type]="inputType"
+    matInput
+    [placeholder]="label"
+    [formControl]="control"
+  />
+  <mat-icon matSuffix>{{ iconName }}</mat-icon>
+  <mat-error *ngIf="control.hasError('required')">
+    {{ label }} is <strong>required</strong></mat-error
+  >
+  <mat-error *ngIf="control.hasError('email')">
+    Enter a <strong>valid</strong> {{ label | lowercase }} address.</mat-error
+  >
+</mat-form-field>

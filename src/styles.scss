@@ -1,1 +1,76 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+@include mat.strong-focus-indicators(
+  (
+    border-style: dotted,
+    border-width: 4px,
+    border-radius: 2px,
+  )
+);
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme-light: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+  )
+);
+
+$my-theme-light: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+  )
+);
+
+@media (prefers-color-scheme: dark) {
+  .user-options {
+    background-color: #7a7a7a;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  // @include mat.all-component-themes($my-theme-light);
+  // @include mat.strong-focus-indicators-theme(purple);
+  .user-options {
+    background-color: #afafaf;
+  }
+  .mat-focus-indicator::before {
+    border: none;
+  }
+}
+
+[color-scheme="dark"] {
+  .user-options {
+    background-color: #7a7a7a;
+  }
+}
+
+[color-scheme="light"] {
+  @include mat.all-component-themes($my-theme-light);
+  @include mat.strong-focus-indicators-theme(purple);
+  .user-options {
+    background-color: #afafaf;
+  }
+  .mat-focus-indicator::before {
+    border: none;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

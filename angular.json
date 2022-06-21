@@ -31,6 +31,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -99,6 +100,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -107,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "task-connect"
+  "defaultProject": "task-connect",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

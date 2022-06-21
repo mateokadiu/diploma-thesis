@@ -1,0 +1,129 @@
+<form [formGroup]="signupForm" class="center-content">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title class="mat-card-header">Sign up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-input
+        label="First name"
+        inputType="text"
+        iconName="face"
+        [control]="getControl('firstName')"
+      ></app-input>
+      <app-input
+        label="Last name"
+        inputType="text"
+        iconName="face"
+        [control]="getControl('lastName')"
+      ></app-input>
+
+      <!-- <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </mat-form-field> -->
+      <app-input
+        label="Email"
+        inputType="email"
+        iconName="email"
+        [control]="getControl('email')"
+      ></app-input>
+
+      <mat-form-field class="full-width">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon matSuffix>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error *ngIf="signupForm.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.controls['password'].hasError('minlength')"
+        >
+          Password should be with
+          <strong>at least 10 characters</strong> </mat-error
+        ><mat-error
+          *ngIf="
+            signupForm.controls['password'].hasError('pattern') &&
+            !signupForm.controls['password'].hasError('minlength')
+          "
+        >
+          Password must contain a <strong>symbol</strong>,
+          <strong>number</strong>, <strong>uppercase letter</strong> and
+          <strong>lowercase letter</strong>.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Confirm your password</mat-label>
+        <input
+          matInput
+          [type]="hideConfirm ? 'password' : 'text'"
+          placeholder="Confirm your password"
+          formControlName="confirmPassword"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideConfirm = !hideConfirm"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideConfirm"
+        >
+          <mat-icon matSuffix>{{
+            hideConfirm ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="signupForm.controls['confirmPassword'].hasError('required')"
+        >
+          Password confirmation is <strong>required</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.controls['confirmPassword'].hasError('minlength')"
+        >
+          Password confirmation should be with
+          <strong>at least 10 characters</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div
+        *ngIf="
+          signupForm.get('password')?.touched &&
+          signupForm.get('confirmPassword')?.touched &&
+          signupForm.errors
+        "
+      >
+        <mat-error *ngIf="signupForm.errors?.['passwordsDontMatch']">
+          Passwords <strong>do not match</strong>
+        </mat-error>
+      </div>
+
+      <button
+        mat-button
+        color="primary"
+        (click)="onSubmit()"
+        [disabled]="signupForm.pristine || signupForm.invalid"
+      >
+        Submit
+      </button>
+    </mat-card-content>
+  </mat-card>
+</form>
