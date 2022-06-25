@@ -7,6 +7,10 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
   },
+  {
+    path: 'task',
+    loadChildren: () => import('./task/task.module').then((m) => m.TaskModule),
+  },
 ];
 
 @NgModule({

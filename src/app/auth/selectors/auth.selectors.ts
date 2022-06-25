@@ -15,3 +15,8 @@ export const isLoggedIn = createSelector(
 );
 
 export const isLoggedOut = createSelector(isLoggedIn, (loggedIn) => !loggedIn);
+
+export const userId = createSelector(
+  getLoggedUserData,
+  (userData) => userData._id as string
+);

@@ -1,5 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @use "@angular/material" as mat;
+@import "/node_modules/angular-calendar/scss/angular-calendar.scss";
+
+.cal-month-view .cal-header .cal-cell,
+.cal-month-view .cal-cell-top,
+.cal-week-view .cal-event,
+.cal-week-view .cal-header,
+.cal-week-view .cal-time {
+  color: #000;
+}
+
+.table-responsive th {
+  color: #fff;
+}
+
+.mat-toolbar {
+  z-index: 100 !important;
+}
 
 @include mat.core();
 
@@ -74,3 +91,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";

@@ -8,7 +8,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { EntityDataModule } from '@ngrx/data';
+import {
+  EntityDataModule,
+  EntityDataService,
+  EntityDefinitionService,
+} from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -22,6 +26,8 @@ import { reducers, metaReducers } from './reducers';
 import { AuthModule } from './auth/auth.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, NotFoundComponent],
@@ -49,7 +55,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatListModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EntityDataModule.forRoot({}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    NgbModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

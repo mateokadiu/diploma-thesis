@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   getAllUsers() {
-    return this.http.get<User[]>(`${this.DB_URL}/users`);
+    return this.http.get<{ payload: User[] }>(`${this.DB_URL}/users`);
   }
 
   deleteAccount(userId: string) {

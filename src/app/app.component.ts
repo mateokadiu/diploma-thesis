@@ -13,8 +13,6 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {}
 
-  loading = true;
-
   ngOnInit() {
     const user = localStorage.getItem('diploma-thesis.user');
     if (user) {

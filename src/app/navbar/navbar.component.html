@@ -49,12 +49,23 @@
         >
         <a
           *ngIf="isLoggedIn$ | async"
+          routerLink="view/task/test"
+          routerLinkActive="active"
+          ><mat-icon>home</mat-icon>Task</a
+        >
+        <a
+          *ngIf="isLoggedIn$ | async"
           (click)="logout()"
           routerLinkActive="active"
           ><mat-icon>logout</mat-icon>Logout</a
         >
       </div>
     </mat-toolbar>
-    <ng-content></ng-content>
+
+    <div class="spinner-container" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-content *ngIf="!loading" ></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
