@@ -154,6 +154,7 @@ export class EventCalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    console.log(action);
     const dialogConfig = defaultDialogConfig();
 
     if (action === 'Edited') {
