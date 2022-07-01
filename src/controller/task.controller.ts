@@ -1,5 +1,10 @@
 import { Request, Response } from "express";
-import { createTask, editTask, getTasks } from "../service/task.service";
+import {
+  createTask,
+  editTask,
+  getTask,
+  getTasks,
+} from "../service/task.service";
 
 export async function createTaskHandler(req: Request, res: Response) {
   try {
@@ -29,17 +34,22 @@ export async function editTaskHandler(
 ) {
   try {
     const task = await editTask(params._id, body);
-    console.log(task);
     if (task) res.status(200).send(task);
     else res.send({ message: "Update failed!" });
   } catch (e: any) {}
 }
 
+export const getTaskHandler = async ({ params }: Request, res: Response) => {
+  const task = await getTask(params._id);
+  if (task) res.status(200).send(task);
+  else res.send({ message: "Cannot find task!" });
+};
+
 export async function deleteTaskHandler(req: any, res: any) {
   try {
     await res?.task.remove();
     res.json({
-      message: `User with id ${req.params._id} was deleted successfully!`,
+      message: `Task with id ${req.params._id} was deleted successfully!`,
     });
   } catch (e: any) {
     res.status(500).json({ message: e.message });

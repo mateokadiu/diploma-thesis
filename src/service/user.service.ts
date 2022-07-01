@@ -10,6 +10,15 @@ export const getUsers = async () => {
   }
 };
 
+export const getUser = async (_id: string) => {
+  try {
+    const user = await UserModel.findOne({ _id });
+    return user;
+  } catch (e: any) {
+    throw { message: "Server is not responding!" };
+  }
+};
+
 export const editUser = async (_id: string, data: any) => {
   try {
     const user = await UserModel.findOneAndUpdate(

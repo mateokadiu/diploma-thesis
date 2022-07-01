@@ -1,11 +1,18 @@
-import mongoose, { model, Schema, Types } from "mongoose";
+import { Types } from "mongoose";
+import {
+  getModelForClass,
+  modelOptions,
+  prop,
+  Ref,
+} from "@typegoose/typegoose";
+import UserModel, { User } from "./user.model";
 
 export interface EventColor {
   primary: string;
   secondary: string;
 }
 
-export interface CalendarTaskDocument extends Document {
+export interface CalendarTaskDocument {
   userId?: string;
   start: Date;
   end?: Date;
@@ -18,40 +25,46 @@ export interface CalendarTaskDocument extends Document {
     afterEnd?: boolean;
   };
   draggable?: boolean;
+  description: string;
 }
 
-const taskSchema = new Schema({
-  userId: {
-    required: true,
-    type: Types.ObjectId,
-    ref: "User",
+@modelOptions({
+  schemaOptions: {
+    timestamps: true,
   },
-  start: {
-    required: true,
-    type: Date,
-  },
-  end: {
-    required: false,
-    type: Date,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: Object,
-    required: true,
-  },
-  allDay: {
-    type: Boolean,
-    required: false,
-  },
-  resizable: {
-    type: Object,
-    required: false,
-  },
-});
+})
+export class Task {
+  @prop({ required: true, type: Types.ObjectId })
+  userId!: Ref<User, Types.ObjectId>;
 
-const TaskModel = model<CalendarTaskDocument>("Task", taskSchema);
+  @prop({
+    required: true,
+    type: Date,
+  })
+  start!: Date;
+
+  @prop({
+    required: true,
+    type: Date,
+  })
+  end!: Date;
+
+  @prop({ minlength: 3, type: String, required: true })
+  title!: string;
+
+  @prop({ type: Object, required: true })
+  color!: Object;
+
+  @prop({ type: Boolean, required: false })
+  allDay!: boolean;
+
+  @prop({ type: Object, required: false })
+  resizable!: Object;
+
+  @prop({ type: String, required: true })
+  description!: string;
+}
+
+const TaskModel = getModelForClass(Task);
 
 export default TaskModel;

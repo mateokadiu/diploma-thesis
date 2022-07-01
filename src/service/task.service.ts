@@ -1,5 +1,6 @@
 import { DocumentDefinition } from "mongoose";
 import TaskModel, { CalendarTaskDocument } from "../models/task.model";
+import { omit } from "lodash";
 
 export async function createTask(
   input: DocumentDefinition<CalendarTaskDocument>
@@ -11,6 +12,15 @@ export async function createTask(
     return { message: "Task not created!" };
   }
 }
+
+export const getTask = async (_id: string) => {
+  try {
+    const task = await TaskModel.findById(_id);
+    return task;
+  } catch (e: any) {
+    throw { message: "Server is not responding!" };
+  }
+};
 
 export const getTasks = async () => {
   try {
@@ -28,7 +38,6 @@ export const editTask = async (_id: string, data: any) => {
       { ...data },
       { returnDocument: "after" }
     );
-    console.log("da", task);
     return task?.toJSON();
   } catch (e: any) {
     throw { message: "Server is not responding!" };

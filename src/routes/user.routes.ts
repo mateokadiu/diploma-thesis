@@ -5,9 +5,13 @@ import {
   editUserHandler,
   getUsersHandler,
 } from "../controller/user.controller";
+// import { deserializeUser } from "../middleware/deserializeUser";
 import { findUserMiddleware } from "../middleware/findUser.middleware";
+// import { requireUser } from "../middleware/requireUser";
 
 const router: Router = express.Router();
+
+// router.use(deserializeUser, requireUser);
 
 router.get("/api/users", [], getUsersHandler);
 

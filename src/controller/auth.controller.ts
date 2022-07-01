@@ -1,11 +1,12 @@
 import bcrypt from "bcrypt";
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { omit } from "lodash";
-import { signupUser, loginUser } from "../service/auth.service";
+import { signupUser, loginUser, changePassword } from "../service/auth.service";
+import { getUser } from "../service/user.service";
 
-export async function signupUserHandler(req: Request, res: Response) {
+export async function signupUserHandler({ body }: Request, res: Response) {
   try {
-    const user = await signupUser(req.body);
+    const user = await signupUser(body);
     if (user.message) {
       res.status(409).send(user);
     } else if (user) {
@@ -13,6 +14,25 @@ export async function signupUserHandler(req: Request, res: Response) {
     }
   } catch (e: any) {
     res.status(409).send(e.message);
+  }
+}
+
+export async function changePasswordHandler(
+  { body, params }: Request,
+  res: Response
+) {
+  const user = await getUser(params._id);
+
+  const validPassword =
+    user && (await bcrypt.compare(body.password, user!.password));
+
+  if (validPassword) {
+    const updated = await changePassword(params._id, body.newPassword);
+    if (updated.modifiedCount) {
+      res.status(200).send({ message: "User password updated successfully!" });
+    }
+  } else {
+    res.status(409).send({ message: "Check your password!" });
   }
 }
 
