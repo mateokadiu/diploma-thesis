@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 
 @Injectable({
@@ -11,7 +12,9 @@ export class AuthService {
   DB_URL = 'http://localhost:3000/api';
 
   login({ email, password }: User) {
-    return this.http.post<User>(`${this.DB_URL}/login`, { email, password });
+    return this.http
+      .post<User>(`${this.DB_URL}/login`, { email, password })
+      .pipe(tap(console.log));
   }
 
   signup(user: User) {

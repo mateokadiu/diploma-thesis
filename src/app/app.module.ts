@@ -28,6 +28,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, NotFoundComponent],
@@ -44,7 +45,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       stateKey: 'router',
       routerState: RouterState.Minimal,
     }),
-    // EntityDataModule.forRoot(entityConfig),
     BrowserAnimationsModule,
     HttpClientModule,
     AuthModule,
@@ -54,11 +54,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatProgressSpinnerModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EntityDataModule.forRoot({}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    NgbModule,
-    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

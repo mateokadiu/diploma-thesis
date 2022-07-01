@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<h2 mat-dialog-title *ngIf="mode !== 'view'">{{ dialogTitle }}</h2>
 <mat-dialog-content>
   <ng-container *ngIf="form">
     <div class="spinner-container" *ngIf="loading$ | async">
@@ -11,15 +11,73 @@
         iconName="title"
         [control]="getControl('title')"
       ></app-input>
-      <mat-form-field appearance="fill">
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
         <input matInput formControlName="start" [matDatepicker]="picker" />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <input
+          matInput
+          [ngxMatDatetimePicker]="picker"
+          placeholder="Choose a date"
+          formControlName="start"
+          [min]="minDate"
+          [max]="maxDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="$any(picker)"
+        ></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker
+          #picker
+          [showSpinners]="showSpinners"
+          [showSeconds]="showSeconds"
+          [stepHour]="stepHour"
+          [stepMinute]="stepMinute"
+          [stepSecond]="stepSecond"
+          [touchUi]="touchUi"
+          [color]="color"
+          [enableMeridian]="enableMeridian"
+          [disableMinute]="disableMinute"
+          [hideTime]="hideTime"
+        >
+        </ngx-mat-datetime-picker>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field>
+        <input
+          matInput
+          [ngxMatDatetimePicker]="picker2"
+          placeholder="Choose a date"
+          formControlName="end"
+          [min]="minDate"
+          [max]="maxDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="$any(picker2)"
+        ></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker
+          #picker2
+          [showSpinners]="showSpinners"
+          [showSeconds]="showSeconds"
+          [stepHour]="stepHour"
+          [stepMinute]="stepMinute"
+          [stepSecond]="stepSecond"
+          [touchUi]="touchUi"
+          [color]="color"
+          [enableMeridian]="enableMeridian"
+          [disableMinute]="disableMinute"
+          [hideTime]="hideTime"
+        >
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
         <input matInput formControlName="end" [matDatepicker]="picker2" />
         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -28,12 +86,58 @@
           [for]="picker2"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field> -->
+
+      <ng-container formGroupName="color">
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a primary color</mat-label>
+          <input matInput type="color" formControlName="primary" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a primary color</mat-label>
+          <input matInput type="color" formControlName="secondary" />
+        </mat-form-field>
+      </ng-container>
+      <mat-form-field appearance="fill">
+        <mat-label>Autosize textarea</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          formControlName="description"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+        ></textarea>
       </mat-form-field>
     </ng-container>
   </ng-container>
+  <ng-container *ngIf="mode === 'view'">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ dialogTitle }}</mat-card-title>
+        <mat-card-subtitle>{{
+          task?.title
+        }}</mat-card-subtitle></mat-card-header
+      >
+      <mat-card-content style="overflow-x: hidden">
+        <div class="card-description">
+          <div class="card-description-title">Description</div>
+          <div class="card-description-content">{{ task?.description }}</div>
+        </div>
+        <div class="card-dates">
+          <div style="font-weight: 300">
+            <span style="font-weight: 700">From:</span> {{ task?.start | date }}
+          </div>
+          <div style="font-weight: 300">
+            <span style="font-weight: 700">To:</span> {{ task?.end | date }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions *ngIf="mode !== 'view'">
   <button mat-raised-button (click)="onClose()">Close</button>
 
   <button

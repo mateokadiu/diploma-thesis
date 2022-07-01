@@ -14,12 +14,18 @@ import { MatInputModule } from '@angular/material/input';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { EventCalendarComponent } from './event-calendar/event-calendar.component';
-import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
+import { EventCalendarComponent } from './event-calendar/event-calendar.component';
+import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatCardModule } from '@angular/material/card';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [EventCalendarComponent, TaskDialogComponent],
@@ -28,19 +34,18 @@ import { MatButtonModule } from '@angular/material/button';
     TaskRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    SharedModule,
     MatButtonModule,
+    SharedModule,
+    TextFieldModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
   ],
   providers: [TaskDataService, TaskEntityService, TasksResolver],
 })

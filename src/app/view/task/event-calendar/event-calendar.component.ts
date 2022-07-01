@@ -7,7 +7,20 @@ import {
   ViewChild,
   EventEmitter,
 } from '@angular/core';
-import { Subject, takeUntil, tap } from 'rxjs';
+import {
+  catchError,
+  distinctUntilChanged,
+  filter,
+  last,
+  map,
+  noop,
+  shareReplay,
+  Subject,
+  takeLast,
+  takeUntil,
+  tap,
+  throwError,
+} from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
 import { TaskEntityService } from 'src/app/services/task/task-entity.service';
 
@@ -28,6 +41,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { defaultDialogConfig } from 'src/app/shared/default-dialog-config';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import { select } from '@ngrx/store';
 
 const colors: any = {
   red: {
@@ -53,29 +67,18 @@ const colors: any = {
 export class EventCalendarComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  view: CalendarView = CalendarView.Month;
-
-  CalendarView = CalendarView;
-
-  viewDate: Date = new Date();
-
-  modalData!: {
-    action: string;
-    event: CalendarEvent;
-  };
-
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({ event }: { event: CalendarEvent<Task> }): void => {
         this.handleEvent('Edited', event);
       },
     },
     {
       label: `<i class="fas fa-fw fa-trash-alt"></i>`,
       a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({ event }: { event: CalendarEvent<Task> }): void => {
         this.tasksEntityService.delete(event.id as string);
         this.events = this.events.filter((iEvent) => iEvent !== event);
         this.handleEvent('Deleted', event);
@@ -83,11 +86,7 @@ export class EventCalendarComponent implements OnInit {
     },
   ];
 
-  events: CalendarEvent[] = [];
-
-  activeDayIsOpen: boolean = true;
-
-  refresh = new Subject<void>();
+  events: CalendarEvent<Task>[] = [];
 
   constructor(
     private tasksEntityService: TaskEntityService,
@@ -95,11 +94,12 @@ export class EventCalendarComponent implements OnInit {
   ) {}
 
   onTaskChanges() {
-    this.events = [];
     this.tasksEntityService.entities$
       .pipe(
-        tap((val) =>
-          val.forEach(({ start, end, title, color, _id }) => {
+        takeUntil(this.destroy$),
+        tap((val) => {
+          this.events = [];
+          val.forEach(({ start, end, title, color, _id, description }) => {
             this.events.push({
               start: new Date(start),
               title,
@@ -108,53 +108,36 @@ export class EventCalendarComponent implements OnInit {
               color: {
                 ...color,
               },
+              description: description,
               id: _id,
             });
-          })
-        )
+          });
+        }),
+        distinctUntilChanged()
       )
-      .subscribe()
-      .unsubscribe();
+      .subscribe();
   }
 
   ngOnInit(): void {
     this.onTaskChanges();
   }
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
+  emitChildEvent({ event, action }: any) {
+    const dialogConfig = defaultDialogConfig();
+    if (action === 'Clicked') {
+      dialogConfig.data = {
+        dialogTitle: 'Task Information',
+        event,
+        mode: 'view',
+      };
     }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
+    this.dialog.open(TaskDialogComponent, {
+      ...dialogConfig,
+      disableClose: false,
     });
-    this.handleEvent('Dropped or resized', event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    console.log(action);
     const dialogConfig = defaultDialogConfig();
 
     if (action === 'Edited') {
@@ -170,46 +153,25 @@ export class EventCalendarComponent implements OnInit {
           disableClose: false,
         })
         .afterClosed()
-        .pipe(
-          tap(() => this.onTaskChanges()),
-          takeUntil(this.destroy$)
-        )
+        .pipe(takeUntil(this.destroy$))
         .subscribe();
     }
   }
 
   addEvent(): void {
     const dialogConfig = defaultDialogConfig();
-
     dialogConfig.data = {
       dialogTitle: 'Create Course',
       mode: 'create',
     };
-
     this.dialog
       .open(TaskDialogComponent, {
         ...dialogConfig,
         disableClose: false,
       })
       .afterClosed()
-      .pipe(
-        tap(() => this.onTaskChanges()),
-        takeUntil(this.destroy$)
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe();
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-    this.tasksEntityService.delete(eventToDelete.id as string);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
   }
 
   ngOnDestroy() {

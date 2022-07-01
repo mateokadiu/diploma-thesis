@@ -15,4 +15,5 @@ export interface Task {
     afterEnd?: boolean;
   };
   draggable?: boolean;
+  description: string;
 }
