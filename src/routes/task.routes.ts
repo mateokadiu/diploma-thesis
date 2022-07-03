@@ -3,6 +3,7 @@ import {
   createTaskHandler,
   deleteTaskHandler,
   editTaskHandler,
+  getEmployeeTasksHandler,
   getTaskHandler,
   getTasksHandler,
 } from "../controller/task.controller";
@@ -17,7 +18,7 @@ router.post("/api/task", createTaskHandler);
 router.get("/api/task/:_id", getTaskHandler);
 router.patch("/api/task/:_id", findTaskMiddleware, editTaskHandler);
 router.delete("/api/task/:_id", findTaskMiddleware, deleteTaskHandler);
-
-router.get("/api/tasks", [], getTasksHandler);
+router.get("/api/tasks/manager/:_id", [], getTasksHandler);
+router.get("/api/tasks/employee/:_id", [], getEmployeeTasksHandler);
 
 export { router as taskRouter };

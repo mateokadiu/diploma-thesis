@@ -33,9 +33,7 @@ export interface Login {
 @modelOptions({
   schemaOptions: {
     // Add createdAt and updatedAt fields
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    timestamps: true, 
   },
 })
 export class User {

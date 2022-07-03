@@ -19,9 +19,24 @@ export async function createTaskHandler(req: Request, res: Response) {
   }
 }
 
-export async function getTasksHandler(req: Request, res: Response) {
+export async function getTasksHandler({ params }: Request, res: Response) {
   try {
-    const tasks = { payload: await getTasks() };
+    let tasks = await getTasks();
+    if (tasks)
+      tasks = tasks.filter((task) => task.userId.toString() === params._id);
+    return res.status(200).send(tasks);
+  } catch (e: any) {
+    res.status(500).json({ message: e.message });
+  }
+}
+
+export async function getEmployeeTasksHandler(
+  { params }: Request,
+  res: Response
+) {
+  try {
+    let tasks = await getTasks();
+    if (tasks) tasks = tasks.filter((task) => task.to === params._id);
     return res.status(200).send(tasks);
   } catch (e: any) {
     res.status(500).json({ message: e.message });

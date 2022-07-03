@@ -4,6 +4,7 @@ import {
   modelOptions,
   prop,
   Ref,
+  Severity,
 } from "@typegoose/typegoose";
 import UserModel, { User } from "./user.model";
 
@@ -26,11 +27,16 @@ export interface CalendarTaskDocument {
   };
   draggable?: boolean;
   description: string;
+  to: string;
+  status: string;
 }
 
 @modelOptions({
   schemaOptions: {
     timestamps: true,
+  },
+  options: {
+    allowMixed: Severity.ALLOW,
   },
 })
 export class Task {
@@ -63,6 +69,15 @@ export class Task {
 
   @prop({ type: String, required: true })
   description!: string;
+
+  @prop({ type: Object, required: true })
+  to!: {
+    _id: string;
+    email: string;
+  };
+
+  @prop({ type: String, required: true, default: "Assigned" })
+  status!: string;
 }
 
 const TaskModel = getModelForClass(Task);

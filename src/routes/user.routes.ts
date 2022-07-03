@@ -13,11 +13,11 @@ const router: Router = express.Router();
 
 // router.use(deserializeUser, requireUser);
 
-router.get("/api/users", [], getUsersHandler);
+router.get("/api/users/:role/:_id", [], getUsersHandler);
 
 router.delete("/api/users/:_id", findUserMiddleware, deleteUserHandler);
 
-router.patch("/api/users/:_id", findUserMiddleware, editUserHandler);
+router.patch("/api/user/:_id", findUserMiddleware, editUserHandler);
 
 export { router as userRouter };
 

@@ -1,11 +1,16 @@
 import { Request, Response } from "express";
 import { omit } from "lodash";
-import UserModel from "../models/user.model";
 import { editUser, getUsers } from "../service/user.service";
 
-export async function getUsersHandler(req: Request, res: Response) {
+export async function getUsersHandler({ params }: Request, res: Response) {
   try {
-    const users = { payload: await getUsers() };
+    let users = await getUsers();
+    if (users)
+      users = users.filter(
+        (user) =>
+          user._id.toString() !== params._id &&
+          user.role.toLowerCase() === params.role
+      );
     return res.status(200).send(users);
   } catch (e: any) {}
 }
