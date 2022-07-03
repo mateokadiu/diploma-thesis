@@ -50,17 +50,82 @@
   cursor: pointer;
 }
 
-.toolbar-nav a .mat-icon {
-  margin-right: 5px;
+.toolbar-menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &.mat-menu-item .mat-icon {
+    margin-right: 0;
+  }
+
+  & span {
+    margin: 0 20px;
+  }
 }
 
-.toolbar-nav a.active,
-.toolbar-nav a:hover {
-  background-color: #303030;
+.mat-menu-button-theme {
+  margin-left: 20px;
 }
 
-.toolbar-nav a:not(:last-child) {
-  margin-right: 20px;
+.mat-menu-item .mat-icon.theme-example-icon {
+  &.deeppurple-amber svg {
+    & .docs-theme-icon-background {
+      fill: #fafafa;
+    }
+
+    & .docs-theme-icon-button {
+      fill: #ffc107;
+    }
+
+    & .docs-theme-icon-toolbar {
+      fill: #673ab7;
+    }
+  }
+
+  &.pink-bluegrey svg {
+    & .docs-theme-icon-background {
+      fill: #303030;
+    }
+
+    & .docs-theme-icon-button {
+      fill: #607d8b;
+    }
+
+    & .docs-theme-icon-toolbar {
+      fill: #e91e63;
+    }
+  }
+
+  &.purple-green svg {
+    & .docs-theme-icon-background {
+      fill: #303030;
+    }
+    & .docs-theme-icon-toolbar {
+      fill: #9c27b0;
+    }
+
+    & .docs-theme-icon-button {
+      fill: #4caf50;
+    }
+  }
+}
+
+.toolbar-nav {
+  & a .mat-icon {
+    margin-right: 5px;
+  }
+
+  & a.active {
+    background-color: #303030;
+  }
+
+  & a:hover {
+    background-color: #303030;
+  }
+
+  a:not(:last-child) {
+    margin-right: 20px;
+  }
 }
 
 .spinner-container {
@@ -69,4 +134,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
 }

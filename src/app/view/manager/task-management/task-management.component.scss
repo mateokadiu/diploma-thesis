@@ -1,0 +1,12 @@
+.mat-add-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & .mat-raised-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 30px;
+  }
+}

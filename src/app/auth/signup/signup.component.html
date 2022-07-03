@@ -34,6 +34,18 @@
       ></app-input>
 
       <mat-form-field class="full-width">
+        <mat-label>Select a user role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="Admin">Admin</mat-option>
+          <mat-option value="Manager">Manager</mat-option>
+          <mat-option value="Employee">Employee</mat-option>
+        </mat-select>
+        <mat-error *ngIf="signupForm.controls['role'].hasError('required')">
+          User role is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
         <mat-label>Enter your password</mat-label>
         <input
           matInput
@@ -117,8 +129,8 @@
       </div>
 
       <button
-        mat-button
-        color="primary"
+        mat-raised-button
+        color="accent"
         (click)="onSubmit()"
         [disabled]="signupForm.pristine || signupForm.invalid"
       >

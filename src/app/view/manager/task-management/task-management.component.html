@@ -1,0 +1,15 @@
+<app-calendar
+  (emitClickEvent)="emitChildEvent($event)"
+  [events]="events"
+></app-calendar>
+
+<div class="mat-add-button-container">
+  <button
+    mat-raised-button
+    matTooltip="Add a new task"
+    color="accent"
+    (click)="addEvent()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

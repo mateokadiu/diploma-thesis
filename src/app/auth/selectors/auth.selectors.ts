@@ -14,6 +14,21 @@ export const isLoggedIn = createSelector(
   (authState) => !!authState.user
 );
 
+export const isManager = createSelector(
+  getLoggedUserData,
+  (user) => !!(user?.role === 'Manager')
+);
+
+export const isEmployee = createSelector(
+  getLoggedUserData,
+  (user) => !!(user?.role === 'Employee')
+);
+
+export const isAdmin = createSelector(
+  getLoggedUserData,
+  (user) => !!(user?.role === 'Admin')
+);
+
 export const isLoggedOut = createSelector(isLoggedIn, (loggedIn) => !loggedIn);
 
 export const userId = createSelector(

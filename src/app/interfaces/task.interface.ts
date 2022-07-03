@@ -16,4 +16,8 @@ export interface Task {
   };
   draggable?: boolean;
   description: string;
+  to: {
+    email: string;
+    _id: string;
+  };
 }

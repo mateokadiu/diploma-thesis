@@ -10,5 +10,3 @@ export const signup = createAction(
   '[Signup Page] User Signup',
   props<AuthState>()
 );
-
-export const logout = createAction('[Logout Link] User Logout');

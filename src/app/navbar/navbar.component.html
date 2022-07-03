@@ -28,44 +28,281 @@
         </button>
         <span>task-connect</span>
       </div>
-      <div class="toolbar-nav">
-        <a
-          *ngIf="isLoggedOut$ | async"
-          routerLink="login"
-          routerLinkActive="active"
-          ><mat-icon>input</mat-icon> Login</a
+      <div class="toolbar-right">
+        <div class="toolbar-nav">
+          <a
+            *ngIf="isLoggedOut$ | async"
+            routerLink="login"
+            routerLinkActive="active"
+            ><mat-icon>input</mat-icon> Login</a
+          >
+          <a
+            *ngIf="isLoggedOut$ | async"
+            routerLink="signup"
+            routerLinkActive="active"
+            ><mat-icon>how_to_reg</mat-icon>Signup</a
+          >
+          <a
+            *ngIf="isLoggedIn$ | async"
+            routerLink="view/home"
+            routerLinkActive="active"
+            ><mat-icon>home</mat-icon>Home</a
+          >
+          <a
+            *ngIf="(isLoggedIn$ | async) && (isManager$ | async)"
+            routerLink="view/manager/task"
+            routerLinkActive="active"
+            ><mat-icon>home</mat-icon>Task</a
+          >
+
+          <a
+            *ngIf="(isLoggedIn$ | async) && (isEmployee$ | async)"
+            routerLink="view/employee/task"
+            routerLinkActive="active"
+            ><mat-icon>home</mat-icon>Employee Task</a
+          >
+          <a
+            *ngIf="isLoggedIn$ | async"
+            (click)="logout()"
+            routerLinkActive="active"
+            ><mat-icon>logout</mat-icon>Logout</a
+          >
+        </div>
+        <button
+          mat-icon-button
+          class="mat-menu-button-theme"
+          matTooltip="Select a theme"
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
         >
-        <a
-          *ngIf="isLoggedOut$ | async"
-          routerLink="signup"
-          routerLinkActive="active"
-          ><mat-icon>how_to_reg</mat-icon>Signup</a
-        >
-        <a
-          *ngIf="isLoggedIn$ | async"
-          routerLink="view/home"
-          routerLinkActive="active"
-          ><mat-icon>home</mat-icon>Home</a
-        >
-        <a
-          *ngIf="isLoggedIn$ | async"
-          routerLink="view/task/test"
-          routerLinkActive="active"
-          ><mat-icon>home</mat-icon>Task</a
-        >
-        <a
-          *ngIf="isLoggedIn$ | async"
-          (click)="logout()"
-          routerLinkActive="active"
-          ><mat-icon>logout</mat-icon>Logout</a
-        >
+          <mat-icon> format_color_fill</mat-icon>
+        </button>
       </div>
     </mat-toolbar>
+
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        class="toolbar-menu-button"
+        (click)="changeTheme('deep-purple-amber-theme')"
+      >
+        <mat-icon color="accent">{{
+          deepPurpleAmber ? "radio_button_checked" : "radio_button_unchecked"
+        }}</mat-icon>
+        <span>Deep Purple & Amber</span>
+        <mat-icon
+          role="img"
+          svgicon="theme-example"
+          class="mat-icon notranslate deeppurple-amber theme-example-icon mat-icon-no-color"
+          aria-hidden="true"
+          data-mat-icon-type="svg"
+          data-mat-icon-name="theme-example"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="100%"
+            height="100%"
+            viewBox="0 0 80 80"
+            fit=""
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+          >
+            <defs>
+              <path
+                d="M77.87 0C79.05 0 80 .95 80 2.13v75.74c0 1.17-.95 2.13-2.13 2.13H2.13C.96 80 0 79.04 0 77.87V2.13C0 .95.96 0 2.13 0h75.74z"
+                id="a"
+              ></path>
+              <path
+                d="M54 40c3.32 0 6 2.69 6 6 0 1.2 0-1.2 0 0 0 3.31-2.68 6-6 6H26c-3.31 0-6-2.69-6-6 0-1.2 0 1.2 0 0 0-3.31 2.69-6 6-6h28z"
+                id="b"
+              ></path>
+              <path d="M0 0h80v17.24H0V0z" id="c"></path>
+            </defs>
+            <use
+              xlink:href="#a"
+              fill="#fff"
+              class="docs-theme-icon-background"
+            ></use>
+            <use
+              xlink:href="#b"
+              fill="#ff4081"
+              class="docs-theme-icon-button"
+            ></use>
+            <use
+              xlink:href="#c"
+              fill="#3f51b5"
+              class="docs-theme-icon-toolbar"
+            ></use></svg
+        ></mat-icon>
+      </button>
+      <button
+        mat-menu-item
+        class="toolbar-menu-button"
+        (click)="changeTheme('indigo-pink-theme')"
+      >
+        <mat-icon color="accent">{{
+          indigoPink ? "radio_button_checked" : "radio_button_unchecked"
+        }}</mat-icon>
+        <span>Indigo & Pink</span>
+        <mat-icon
+          role="img"
+          svgicon="theme-example"
+          class="mat-icon notranslate indigo-pink theme-example-icon mat-icon-no-color"
+          aria-hidden="true"
+          data-mat-icon-type="svg"
+          data-mat-icon-name="theme-example"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="100%"
+            height="100%"
+            viewBox="0 0 80 80"
+            fit=""
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+          >
+            <defs>
+              <path
+                d="M77.87 0C79.05 0 80 .95 80 2.13v75.74c0 1.17-.95 2.13-2.13 2.13H2.13C.96 80 0 79.04 0 77.87V2.13C0 .95.96 0 2.13 0h75.74z"
+                id="a"
+              ></path>
+              <path
+                d="M54 40c3.32 0 6 2.69 6 6 0 1.2 0-1.2 0 0 0 3.31-2.68 6-6 6H26c-3.31 0-6-2.69-6-6 0-1.2 0 1.2 0 0 0-3.31 2.69-6 6-6h28z"
+                id="b"
+              ></path>
+              <path d="M0 0h80v17.24H0V0z" id="c"></path>
+            </defs>
+            <use
+              xlink:href="#a"
+              fill="#fff"
+              class="docs-theme-icon-background"
+            ></use>
+            <use
+              xlink:href="#b"
+              fill="#ff4081"
+              class="docs-theme-icon-button"
+            ></use>
+            <use
+              xlink:href="#c"
+              fill="#3f51b5"
+              class="docs-theme-icon-toolbar"
+            ></use></svg
+        ></mat-icon>
+      </button>
+      <button
+        mat-menu-item
+        class="toolbar-menu-button"
+        (click)="changeTheme('pink-blue-grey-theme')"
+      >
+        <mat-icon color="accent">{{
+          pinkBlueGrey ? "radio_button_checked" : "radio_button_unchecked"
+        }}</mat-icon>
+        <span>Pink & Blue-grey</span>
+        <mat-icon
+          role="img"
+          svgicon="theme-example"
+          class="mat-icon notranslate pink-bluegrey theme-example-icon mat-icon-no-color"
+          aria-hidden="true"
+          data-mat-icon-type="svg"
+          data-mat-icon-name="theme-example"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="100%"
+            height="100%"
+            viewBox="0 0 80 80"
+            fit=""
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+          >
+            <defs>
+              <path
+                d="M77.87 0C79.05 0 80 .95 80 2.13v75.74c0 1.17-.95 2.13-2.13 2.13H2.13C.96 80 0 79.04 0 77.87V2.13C0 .95.96 0 2.13 0h75.74z"
+                id="a"
+              ></path>
+              <path
+                d="M54 40c3.32 0 6 2.69 6 6 0 1.2 0-1.2 0 0 0 3.31-2.68 6-6 6H26c-3.31 0-6-2.69-6-6 0-1.2 0 1.2 0 0 0-3.31 2.69-6 6-6h28z"
+                id="b"
+              ></path>
+              <path d="M0 0h80v17.24H0V0z" id="c"></path>
+            </defs>
+            <use
+              xlink:href="#a"
+              fill="#fff"
+              class="docs-theme-icon-background"
+            ></use>
+            <use
+              xlink:href="#b"
+              fill="#ff4081"
+              class="docs-theme-icon-button"
+            ></use>
+            <use
+              xlink:href="#c"
+              fill="#3f51b5"
+              class="docs-theme-icon-toolbar"
+            ></use></svg
+        ></mat-icon>
+      </button>
+      <button
+        mat-menu-item
+        class="toolbar-menu-button"
+        (click)="changeTheme('purple-green-theme')"
+      >
+        <mat-icon color="accent">{{
+          purpleGreen ? "radio_button_checked" : "radio_button_unchecked"
+        }}</mat-icon>
+        <span>Purple & Green</span>
+        <mat-icon
+          role="img"
+          svgicon="theme-example"
+          class="mat-icon notranslate purple-green theme-example-icon mat-icon-no-color"
+          aria-hidden="true"
+          data-mat-icon-type="svg"
+          data-mat-icon-name="theme-example"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="100%"
+            height="100%"
+            viewBox="0 0 80 80"
+            fit=""
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+          >
+            <defs>
+              <path
+                d="M77.87 0C79.05 0 80 .95 80 2.13v75.74c0 1.17-.95 2.13-2.13 2.13H2.13C.96 80 0 79.04 0 77.87V2.13C0 .95.96 0 2.13 0h75.74z"
+                id="a"
+              ></path>
+              <path
+                d="M54 40c3.32 0 6 2.69 6 6 0 1.2 0-1.2 0 0 0 3.31-2.68 6-6 6H26c-3.31 0-6-2.69-6-6 0-1.2 0 1.2 0 0 0-3.31 2.69-6 6-6h28z"
+                id="b"
+              ></path>
+              <path d="M0 0h80v17.24H0V0z" id="c"></path>
+            </defs>
+            <use
+              xlink:href="#a"
+              fill="#fff"
+              class="docs-theme-icon-background"
+            ></use>
+            <use
+              xlink:href="#b"
+              fill="#ff4081"
+              class="docs-theme-icon-button"
+            ></use>
+            <use
+              xlink:href="#c"
+              fill="#3f51b5"
+              class="docs-theme-icon-toolbar"
+            ></use></svg
+        ></mat-icon>
+      </button>
+    </mat-menu>
 
     <div class="spinner-container" *ngIf="loading">
       <mat-spinner></mat-spinner>
     </div>
 
-    <ng-content *ngIf="!loading" ></ng-content>
+    <ng-content *ngIf="!loading"></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

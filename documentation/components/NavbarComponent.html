@@ -1,0 +1,783 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>task-connect documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">task-connect documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  NavbarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/navbar/navbar.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-navbar</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./navbar.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./navbar.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isHandset$" >isHandset$</a>
+                            </li>
+                            <li>
+                                <a href="#isLoggedIn$" >isLoggedIn$</a>
+                            </li>
+                            <li>
+                                <a href="#isLoggedOut$" >isLoggedOut$</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(breakpointObserver: BreakpointObserver, store: <a href="../interfaces/AppState.html" target="_self">Store&lt;AppState&gt;</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/navbar/navbar.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>breakpointObserver</td>
+                                                  
+                                                        <td>
+                                                                    <code>BreakpointObserver</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/AppState.html" target="_self" >Store&lt;AppState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/app/navbar/navbar.component.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/navbar/navbar.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isHandset$"></a>
+                    <span class="name">
+                        <span ><b>isHandset$</b></span>
+                        <a href="#isHandset$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) &#x3D;&gt; result.matches),
+      shareReplay()
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/navbar/navbar.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoggedIn$"></a>
+                    <span class="name">
+                        <span ><b>isLoggedIn$</b></span>
+                        <a href="#isLoggedIn$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.pipe(select(isLoggedIn))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/navbar/navbar.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoggedOut$"></a>
+                    <span class="name">
+                        <span ><b>isLoggedOut$</b></span>
+                        <a href="#isLoggedOut$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.pipe(select(isLoggedOut))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/navbar/navbar.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/navbar/navbar.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { BreakpointObserver, Breakpoints } from &#x27;@angular/cdk/layout&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { map, shareReplay } from &#x27;rxjs/operators&#x27;;
+import { select, Store } from &#x27;@ngrx/store&#x27;;
+import { AppState } from &#x27;../reducers&#x27;;
+import { isLoggedIn, isLoggedOut } from &#x27;../auth/selectors/auth.selectors&#x27;;
+import { logout } from &#x27;../auth/actions/auth-actions&#x27;;
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from &#x27;@angular/router&#x27;;
+
+@Component({
+  selector: &#x27;app-navbar&#x27;,
+  templateUrl: &#x27;./navbar.component.html&#x27;,
+  styleUrls: [&#x27;./navbar.component.scss&#x27;],
+})
+export class NavbarComponent implements OnInit {
+  loading &#x3D; true;
+
+  isHandset$: Observable&lt;boolean&gt; &#x3D; this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) &#x3D;&gt; result.matches),
+      shareReplay()
+    );
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private store: Store&lt;AppState&gt;,
+    private router: Router
+  ) {}
+  ngOnInit(): void {
+    this.router.events.subscribe((event) &#x3D;&gt; {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.loading &#x3D; true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.loading &#x3D; false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+  }
+  isLoggedIn$ &#x3D; this.store.pipe(select(isLoggedIn));
+  isLoggedOut$ &#x3D; this.store.pipe(select(isLoggedOut));
+
+  logout() {
+    this.store.dispatch(logout());
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;sidenav-container&quot;&gt;
+  &lt;mat-sidenav
+    #drawer
+    class&#x3D;&quot;sidenav&quot;
+    fixedInViewport
+    [attr.role]&#x3D;&quot;(isHandset$ | async) ? &#x27;dialog&#x27; : &#x27;navigation&#x27;&quot;
+    [mode]&#x3D;&quot;(isHandset$ | async) ? &#x27;over&#x27; : &#x27;side&#x27;&quot;
+    [opened]&#x3D;&quot;(isHandset$ | async) &#x3D;&#x3D;&#x3D; false&quot;
+  &gt;
+    &lt;mat-toolbar&gt;Menu&lt;/mat-toolbar&gt;
+    &lt;mat-nav-list&gt;
+      &lt;a mat-list-item routerLink&#x3D;&quot;login&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Login&lt;/a&gt;
+      &lt;a mat-list-item routerLink&#x3D;&quot;signup&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Signup&lt;/a&gt;
+      &lt;a mat-list-item routerLink&#x3D;&quot;view/home&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Home&lt;/a&gt;
+    &lt;/mat-nav-list&gt;
+  &lt;/mat-sidenav&gt;
+  &lt;mat-sidenav-content&gt;
+    &lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;
+      &lt;div&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          aria-label&#x3D;&quot;Toggle sidenav&quot;
+          mat-icon-button
+          (click)&#x3D;&quot;drawer.toggle()&quot;
+          *ngIf&#x3D;&quot;isHandset$ | async&quot;
+        &gt;
+          &lt;mat-icon aria-label&#x3D;&quot;Side nav toggle icon&quot;&gt;menu&lt;/mat-icon&gt;
+        &lt;/button&gt;
+        &lt;span&gt;task-connect&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;toolbar-nav&quot;&gt;
+        &lt;a
+          *ngIf&#x3D;&quot;isLoggedOut$ | async&quot;
+          routerLink&#x3D;&quot;login&quot;
+          routerLinkActive&#x3D;&quot;active&quot;
+          &gt;&lt;mat-icon&gt;input&lt;/mat-icon&gt; Login&lt;/a
+        &gt;
+        &lt;a
+          *ngIf&#x3D;&quot;isLoggedOut$ | async&quot;
+          routerLink&#x3D;&quot;signup&quot;
+          routerLinkActive&#x3D;&quot;active&quot;
+          &gt;&lt;mat-icon&gt;how_to_reg&lt;/mat-icon&gt;Signup&lt;/a
+        &gt;
+        &lt;a
+          *ngIf&#x3D;&quot;isLoggedIn$ | async&quot;
+          routerLink&#x3D;&quot;view/home&quot;
+          routerLinkActive&#x3D;&quot;active&quot;
+          &gt;&lt;mat-icon&gt;home&lt;/mat-icon&gt;Home&lt;/a
+        &gt;
+        &lt;a
+          *ngIf&#x3D;&quot;isLoggedIn$ | async&quot;
+          routerLink&#x3D;&quot;view/task/test&quot;
+          routerLinkActive&#x3D;&quot;active&quot;
+          &gt;&lt;mat-icon&gt;home&lt;/mat-icon&gt;Task&lt;/a
+        &gt;
+        &lt;a
+          *ngIf&#x3D;&quot;isLoggedIn$ | async&quot;
+          (click)&#x3D;&quot;logout()&quot;
+          routerLinkActive&#x3D;&quot;active&quot;
+          &gt;&lt;mat-icon&gt;logout&lt;/mat-icon&gt;Logout&lt;/a
+        &gt;
+      &lt;/div&gt;
+    &lt;/mat-toolbar&gt;
+
+    &lt;div class&#x3D;&quot;spinner-container&quot; *ngIf&#x3D;&quot;loading&quot;&gt;
+      &lt;mat-spinner&gt;&lt;/mat-spinner&gt;
+    &lt;/div&gt;
+
+    &lt;ng-content *ngIf&#x3D;&quot;!loading&quot; &gt;&lt;/ng-content&gt;
+  &lt;/mat-sidenav-content&gt;
+&lt;/mat-sidenav-container&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./navbar.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+@media (min-width: 960px) {
+  .mat-sidenav-content {
+    margin-left: 0 !important;
+  }
+
+  .mat-sidenav {
+    transform: translateX(-100%) !important;
+  }
+}
+
+.toolbar-nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.toolbar-nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toolbar-nav a .mat-icon {
+  margin-right: 5px;
+}
+
+.toolbar-nav a.active,
+.toolbar-nav a:hover {
+  background-color: #303030;
+}
+
+.toolbar-nav a:not(:last-child) {
+  margin-right: 20px;
+}
+
+.spinner-container {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="sidenav-container">  <mat-sidenav    #drawer    class="sidenav"    fixedInViewport    [attr.role]="(isHandset$ | async) ? \'dialog\' : \'navigation\'"    [mode]="(isHandset$ | async) ? \'over\' : \'side\'"    [opened]="(isHandset$ | async) === false"  >    <mat-toolbar>Menu</mat-toolbar>    <mat-nav-list>      <a mat-list-item routerLink="login" routerLinkActive="active">Login</a>      <a mat-list-item routerLink="signup" routerLinkActive="active">Signup</a>      <a mat-list-item routerLink="view/home" routerLinkActive="active">Home</a>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <mat-toolbar color="primary">      <div>        <button          type="button"          aria-label="Toggle sidenav"          mat-icon-button          (click)="drawer.toggle()"          *ngIf="isHandset$ | async"        >          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>        </button>        <span>task-connect</span>      </div>      <div class="toolbar-nav">        <a          *ngIf="isLoggedOut$ | async"          routerLink="login"          routerLinkActive="active"          ><mat-icon>input</mat-icon> Login</a        >        <a          *ngIf="isLoggedOut$ | async"          routerLink="signup"          routerLinkActive="active"          ><mat-icon>how_to_reg</mat-icon>Signup</a        >        <a          *ngIf="isLoggedIn$ | async"          routerLink="view/home"          routerLinkActive="active"          ><mat-icon>home</mat-icon>Home</a        >        <a          *ngIf="isLoggedIn$ | async"          routerLink="view/task/test"          routerLinkActive="active"          ><mat-icon>home</mat-icon>Task</a        >        <a          *ngIf="isLoggedIn$ | async"          (click)="logout()"          routerLinkActive="active"          ><mat-icon>logout</mat-icon>Logout</a        >      </div>    </mat-toolbar>    <div class="spinner-container" *ngIf="loading">      <mat-spinner></mat-spinner>    </div>    <ng-content *ngIf="!loading" ></ng-content>  </mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'EventCalendarComponent', 'selector': 'app-event-calendar'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NavbarComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

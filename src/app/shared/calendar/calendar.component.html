@@ -1,61 +1,48 @@
 <div class="dark-mode" style="width: 90%; margin: 0 auto; margin-top: 30px">
   <div class="row text-center">
     <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
+      <mat-button-toggle-group>
+        <mat-button-toggle
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
+          >Previous</mat-button-toggle
         >
-          Previous
-        </div>
-        <div
-          class="btn btn-outline-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
+        <mat-button-toggle mwlCalendarToday [(viewDate)]="viewDate"
+          >Today</mat-button-toggle
         >
-          Today
-        </div>
-        <div
-          class="btn btn-primary"
+        <mat-button-toggle
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
+          >Next</mat-button-toggle
         >
-          Next
-        </div>
-      </div>
+      </mat-button-toggle-group>
     </div>
     <div class="col-md-4">
       <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
     </div>
     <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
+      <mat-button-toggle-group>
+        <mat-button-toggle
           (click)="setView(CalendarView.Month)"
-          [class.active]="view === CalendarView.Month"
+          [class.mat-button-toggle-checked]="view === CalendarView.Month"
         >
           Month
-        </div>
-        <div
-          class="btn btn-primary"
+        </mat-button-toggle>
+        <mat-button-toggle
           (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
+          [class.mat-button-toggle-checked]="view === CalendarView.Week"
+          >Week</mat-button-toggle
         >
-          Week
-        </div>
-        <div
-          class="btn btn-primary"
+        <mat-button-toggle
           (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day"
+          [class.mat-button-toggle-checked]="view === CalendarView.Day"
+          >Day</mat-button-toggle
         >
-          Day
-        </div>
-      </div>
+      </mat-button-toggle-group>
     </div>
   </div>
   <br />
@@ -90,8 +77,4 @@
     >
     </mwl-calendar-day-view>
   </div>
-
-  <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
-  <br /><br /><br />
 </div>

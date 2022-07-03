@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from '../shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,6 +28,7 @@ import { AuthEffects } from './effects/auth.effects';
     MatButtonModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatSnackBarModule,
     MatCardModule,

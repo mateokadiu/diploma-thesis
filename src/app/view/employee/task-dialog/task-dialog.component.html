@@ -1,0 +1,33 @@
+<mat-dialog-content>
+  <ng-container *ngIf="mode === 'view'">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ dialogTitle }}</mat-card-title>
+        <mat-card-subtitle>{{
+          task?.title
+        }}</mat-card-subtitle></mat-card-header
+      >
+      <mat-card-content style="overflow-x: hidden">
+        <div class="card-description">
+          <div class="card-description-title">Description</div>
+          <div class="card-description-content">{{ task?.description }}</div>
+        </div>
+        <div class="card-dates">
+          <div style="font-weight: 300">
+            <span style="font-weight: 700">From:</span> {{ task?.start | date }}
+          </div>
+          <div style="font-weight: 300">
+            <span style="font-weight: 700">To:</span> {{ task?.end | date }}
+          </div>
+        </div>
+        <div>{{ task?.to }}</div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="onClose()">Close</button>
+
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

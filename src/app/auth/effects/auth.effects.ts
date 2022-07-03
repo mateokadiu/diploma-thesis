@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs';
+import { logout } from 'src/app/reducers';
 import { AuthActions } from '../actions';
 
 @Injectable()
@@ -53,7 +54,7 @@ export class AuthEffects {
   logout$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.logout),
+        ofType(logout),
         tap((action) => {
           localStorage.removeItem('diploma-thesis.user');
           console.log('hereeee');
