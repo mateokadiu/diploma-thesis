@@ -70,11 +70,11 @@ export class Task {
   @prop({ type: String, required: true })
   description!: string;
 
-  @prop({ type: Object, required: true })
-  to!: {
-    _id: string;
-    email: string;
-  };
+  @prop({ type: String, required: true })
+  to!: string;
+
+  @prop({ type: String, required: true })
+  from!: string;
 
   @prop({ type: String, required: true, default: "Assigned" })
   status!: string;

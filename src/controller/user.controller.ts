@@ -4,15 +4,30 @@ import { editUser, getUsers } from "../service/user.service";
 
 export async function getUsersHandler({ params }: Request, res: Response) {
   try {
-    let users = await getUsers();
-    if (users)
-      users = users.filter(
-        (user) =>
-          user._id.toString() !== params._id &&
-          user.role.toLowerCase() === params.role
-      );
+    const users = await getUsers();
     return res.status(200).send(users);
   } catch (e: any) {}
+}
+
+export async function getPaginatedUsers(
+  { params, query }: Request,
+  res: Response
+) {
+  let users: any = await getUsers();
+
+  const queryParams = query;
+  const filter = queryParams?.filter || "",
+    userId = queryParams?._id,
+    sortOrder = queryParams?.sortOrder,
+    pageNumber = parseInt(queryParams?.pageNumber as string),
+    pageSize = parseInt(queryParams?.pageSize as string);
+  const initialPos = pageNumber * pageSize;
+
+  const usersPage = users
+    .filter((u: any) => u?._id.toString() !== userId)
+    .slice(initialPos, initialPos + pageSize);
+
+  res.status(200).json(usersPage);
 }
 
 export async function deleteUserHandler(req: any, res: any) {

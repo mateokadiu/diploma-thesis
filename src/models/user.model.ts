@@ -9,6 +9,7 @@ import {
   Ref,
 } from "@typegoose/typegoose";
 import bcrypt from "bcrypt";
+import e from "express";
 import TaskModel, { Task } from "./task.model";
 
 export interface Login {
@@ -30,10 +31,26 @@ export interface Login {
   await TaskModel.deleteMany({ userId: user._id });
   next();
 })
+// @pre<User>("findOneAndUpdate", async function (next) {
+//   const _id = this.getQuery()?._id;
+
+//   const email = this?.getUpdate()?.email;
+//   if (email) {
+//     const user = await UserModel.findOne({ _id });
+//     if (user?.role === "Employee") {
+//       await TaskModel.updateMany({ to: user?.email }, { to: email });
+//     } else if (user?.role === "Manager") {
+//       await TaskModel.updateMany({ from: user?.email }, { from: email });
+//     }
+//   }
+//   next();
+//   // if(user?.role === 'Manager')
+//   // await TaskModel.
+// })
 @modelOptions({
   schemaOptions: {
     // Add createdAt and updatedAt fields
-    timestamps: true, 
+    timestamps: true,
   },
 })
 export class User {

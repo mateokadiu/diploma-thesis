@@ -3,6 +3,7 @@ import { omit } from "lodash";
 import {
   deleteUserHandler,
   editUserHandler,
+  getPaginatedUsers,
   getUsersHandler,
 } from "../controller/user.controller";
 // import { deserializeUser } from "../middleware/deserializeUser";
@@ -13,11 +14,12 @@ const router: Router = express.Router();
 
 // router.use(deserializeUser, requireUser);
 
-router.get("/api/users/:role/:_id", [], getUsersHandler);
+router.get("/api/users/:role/:email", [], getUsersHandler);
 
 router.delete("/api/users/:_id", findUserMiddleware, deleteUserHandler);
 
 router.patch("/api/user/:_id", findUserMiddleware, editUserHandler);
+router.get("/api/users", [], getPaginatedUsers);
 
 export { router as userRouter };
 
