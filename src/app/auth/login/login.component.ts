@@ -70,8 +70,12 @@ export class LoginComponent implements OnInit {
         takeUntil(this.destroy$)
       )
       .subscribe({
-        error: ({ error }) => this._snackBar.open(error.message, 'OK'),
-        complete: () => this._snackBar.open('Logged in successfully!', 'OK'),
+        error: ({ error }) =>
+          this._snackBar.open(error.message, 'OK', { duration: 2000 }),
+        complete: () =>
+          this._snackBar.open('Logged in successfully!', 'OK', {
+            duration: 2000,
+          }),
       });
   }
 

@@ -18,8 +18,8 @@ import {
 } from 'src/app/auth/selectors/auth.selectors';
 import { Task } from 'src/app/interfaces/task.interface';
 import { User } from 'src/app/interfaces/user.interface';
-import { ManagerTaskEntityService } from 'src/app/services/manager/manager-task-entity.service';
-import { UserEntityService } from 'src/app/services/user/user-entity.service';
+import { ManagerTaskEntityService } from '../../services/manager/manager-task-entity.service';
+import { UserEntityService } from '../../services/user/user-entity.service';
 
 @Component({
   selector: 'app-task-dialog',
@@ -74,6 +74,7 @@ export class TaskDialogComponent implements OnInit {
   stepSecond = 1;
   color: ThemePalette = 'primary';
   disableMinute = false;
+  selected!: any;
   hideTime = false;
 
   constructor(
@@ -95,6 +96,7 @@ export class TaskDialogComponent implements OnInit {
     this.dialogTitle = data.dialogTitle;
     this.task = data.event;
     this.mode = data.mode;
+
     const formControls = {
       title: ['', Validators.required],
       start: ['', Validators.required],
@@ -104,11 +106,11 @@ export class TaskDialogComponent implements OnInit {
         secondary: ['', Validators.required],
       }),
       description: ['', Validators.required],
-      to: [{}, Validators.required],
+      from: [this.user?.email, Validators.required],
+      to: ['', Validators.required],
     };
 
     if (this.mode === 'view') {
-      console.log(this.task);
     } else if (this.mode == 'update') {
       this.form = this.fb.group({ ...formControls });
       this.form.patchValue({ ...data.event });
@@ -150,6 +152,7 @@ export class TaskDialogComponent implements OnInit {
           color: task.color,
           description: task.description,
           to: task.to,
+          from: task.from,
         })
         .pipe(tap(() => this.dialogRef.close()))
         .subscribe(noop);
@@ -163,6 +166,7 @@ export class TaskDialogComponent implements OnInit {
           color: task.color,
           description: task.description,
           to: task.to,
+          from: task.from,
         })
         .pipe(tap((val) => this.dialogRef.close(val)))
         .subscribe(noop);

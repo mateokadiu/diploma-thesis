@@ -9,6 +9,11 @@ export const getLoggedUserData = createSelector(
   (authState) => authState.user as User
 );
 
+export const selectEmail = createSelector(
+  getLoggedUserData,
+  (user) => user?.email as string
+);
+
 export const isLoggedIn = createSelector(
   selectAuthState,
   (authState) => !!authState.user
@@ -33,5 +38,5 @@ export const isLoggedOut = createSelector(isLoggedIn, (loggedIn) => !loggedIn);
 
 export const userId = createSelector(
   getLoggedUserData,
-  (userData) => userData._id as string
+  (userData) => userData?._id as string
 );

@@ -54,6 +54,12 @@
             routerLinkActive="active"
             ><mat-icon>home</mat-icon>Task</a
           >
+          <a
+            *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)"
+            routerLink="view/admin/user-management"
+            routerLinkActive="active"
+            ><mat-icon>home</mat-icon>User Management</a
+          >
 
           <a
             *ngIf="(isLoggedIn$ | async) && (isEmployee$ | async)"

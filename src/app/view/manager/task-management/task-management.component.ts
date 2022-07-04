@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CalendarEventAction, CalendarEvent } from 'angular-calendar';
 import { Subject, takeUntil, tap, distinctUntilChanged } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
-import { ManagerTaskEntityService } from 'src/app/services/manager/manager-task-entity.service';
 import { defaultDialogConfig } from 'src/app/shared/default-dialog-config';
+import { ManagerTaskEntityService } from '../../services/manager/manager-task-entity.service';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 
 @Component({
@@ -47,20 +47,23 @@ export class TaskManagementComponent implements OnInit {
         takeUntil(this.destroy$),
         tap((val) => {
           this.events = [];
-          val.forEach(({ start, end, title, color, _id, description, to }) => {
-            this.events.push({
-              start: new Date(start),
-              title,
-              actions: this.actions,
-              end: new Date(end as Date),
-              color: {
-                ...color,
-              },
-              description: description,
-              id: _id,
-              to,
-            });
-          });
+          val.forEach(
+            ({ start, end, title, color, _id, description, to, from }) => {
+              this.events.push({
+                start: new Date(start),
+                title,
+                actions: this.actions,
+                end: new Date(end as Date),
+                color: {
+                  ...color,
+                },
+                description: description,
+                id: _id,
+                to,
+                from,
+              });
+            }
+          );
         }),
         distinctUntilChanged()
       )

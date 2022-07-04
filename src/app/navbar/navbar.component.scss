@@ -14,12 +14,22 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  position: relative;
+  height: 60px;
+  z-index: 1000;
 }
 
 .mat-toolbar.mat-primary {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.nav-fixed-fix {
+  margin-top: 55px;
 }
 
 @media (min-width: 960px) {

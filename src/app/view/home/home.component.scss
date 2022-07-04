@@ -1,0 +1,44 @@
+header.docs-header-background {
+  overflow: hidden;
+  position: relative;
+  height: 420px;
+}
+
+header.docs-header-background::before {
+  content: "";
+  position: absolute;
+  background-image: url("../../../assets/images/svg/angular-background-image.svg");
+  background-size: 600px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: 80% 20px;
+  opacity: 0.2;
+}
+
+.docs-header-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docs-header-headline {
+  text-align: center;
+  color: #fff;
+}
+
+.mat-h1 {
+  font-size: 3.5rem;
+  letter-spacing: 2px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}

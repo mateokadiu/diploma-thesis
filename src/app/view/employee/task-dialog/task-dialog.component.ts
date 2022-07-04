@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { noop, Observable, tap } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
-import { EmployeeTaskEntityService } from 'src/app/services/employee/employee-task-entity.service';
+import { EmployeeTaskEntityService } from '../../services/employee/employee-task-entity.service';
 
 @Component({
   selector: 'app-task-dialog',

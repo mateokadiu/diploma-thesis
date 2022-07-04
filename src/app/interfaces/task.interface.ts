@@ -3,6 +3,7 @@ export interface Task {
   userId?: string;
   start: Date;
   end?: Date;
+  from: string;
   title: string;
   color: {
     primary: string;
@@ -16,8 +17,5 @@ export interface Task {
   };
   draggable?: boolean;
   description: string;
-  to: {
-    email: string;
-    _id: string;
-  };
+  to: string;
 }

@@ -12,9 +12,7 @@ export class AuthService {
   DB_URL = 'http://localhost:3000/api';
 
   login({ email, password }: User) {
-    return this.http
-      .post<User>(`${this.DB_URL}/login`, { email, password })
-      .pipe(tap(console.log));
+    return this.http.post<User>(`${this.DB_URL}/login`, { email, password });
   }
 
   signup(user: User) {

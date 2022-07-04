@@ -22,9 +22,9 @@ import {
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
 } from '@angular-material-components/datetime-picker';
-import { ManagerTasksResolver } from 'src/app/services/manager/manager-tasks.resolver';
-import { ManagerTaskDataService } from 'src/app/services/manager/manager-tasks-data.service';
-import { ManagerTaskEntityService } from 'src/app/services/manager/manager-task-entity.service';
+import { ManagerTaskEntityService } from '../services/manager/manager-task-entity.service';
+import { ManagerTaskDataService } from '../services/manager/manager-tasks-data.service';
+import { ManagerTasksResolver } from '../services/manager/manager-tasks.resolver';
 
 @NgModule({
   declarations: [TaskManagementComponent, TaskDialogComponent],

@@ -118,6 +118,7 @@ export class NavbarComponent implements OnInit {
         body.classList.remove('indigo-pink-theme');
         body.classList.remove('pink-blue-grey-theme');
         body.classList.remove('deep-purple-amber-theme');
+        body.classList.add(themeName);
         localStorage.setItem('diploma-thesis.theme', themeName);
         break;
       }

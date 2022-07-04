@@ -49,7 +49,7 @@ export class AuthEffects {
   );
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, 'OK', { duration: 3000 });
+    this._snackBar.open(message, 'OK', { duration: 2000 });
   }
   logout$ = createEffect(
     () =>
@@ -57,7 +57,6 @@ export class AuthEffects {
         ofType(logout),
         tap((action) => {
           localStorage.removeItem('diploma-thesis.user');
-          console.log('hereeee');
           this.router
             .navigateByUrl('/login')
             .then(() => this.openSnackBar('Logged Out Successfully!'));

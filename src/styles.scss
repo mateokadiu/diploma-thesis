@@ -10,6 +10,32 @@
   color: #000;
 }
 
+.purple-green-theme {
+  $my-primary: mat.define-palette(mat.$purple-palette);
+  $my-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+
+  $my-theme: mat.define-dark-theme(
+    (
+      color: (
+        primary: $my-primary,
+        accent: $my-accent,
+      ),
+    )
+  );
+
+  & .mat-button-toggle-checked {
+    background-color: mat.get-color-from-palette($my-accent) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  & header.docs-header-background {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  @include mat.all-component-colors($my-theme);
+}
+
 .indigo-pink-theme {
   $my-primary: mat.define-palette(mat.$indigo-palette);
   $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
@@ -25,6 +51,11 @@
 
   & .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($my-accent) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  & header.docs-header-background {
+    background-color: mat.get-color-from-palette($my-primary) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
   }
 
@@ -49,7 +80,18 @@
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
   }
 
+  & header.docs-header-background {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
   @include mat.all-component-colors($my-theme);
+}
+
+.search-bar-container {
+  & .mat-form-field-appearance-fill .mat-form-field-infix {
+    padding-right: 2.2rem;
+  }
 }
 
 .pink-blue-grey-theme {
@@ -67,6 +109,11 @@
 
   & .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($my-accent) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  & header.docs-header-background {
+    background-color: mat.get-color-from-palette($my-primary) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
   }
 
