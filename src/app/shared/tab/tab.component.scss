@@ -1,0 +1,49 @@
+.mat-tab-group {
+  margin: 40px auto;
+  min-height: 200px;
+}
+
+.mat-card {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image {
+  position: relative;
+  width: 80%;
+  height: 160px;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+
+.card-image.completed {
+  background-color: #077e8c;
+}
+
+.card-image.assigned {
+  background-color: #f29339;
+}
+
+.card-image.failed {
+  background-color: #d9512c;
+}
+
+.card-image::before {
+  content: "";
+  position: absolute;
+  background-image: url("../../../assets/images/svg/task-background-image.svg");
+  background-size: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.2;
+}

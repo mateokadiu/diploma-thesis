@@ -3,13 +3,15 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { noop, Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { AppState, logout } from '../reducers';
+import { AppState } from '../reducers';
 import {
+  getLoggedUserData,
   isAdmin,
   isEmployee,
   isLoggedIn,
   isLoggedOut,
   isManager,
+  selectUserInitials,
 } from '../auth/selectors/auth.selectors';
 import {
   NavigationCancel,
@@ -18,6 +20,12 @@ import {
   NavigationStart,
   Router,
 } from '@angular/router';
+import { logout } from '../auth/actions/auth-actions';
+import { AuthState } from '../auth/reducers';
+import { User } from '../interfaces/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { defaultDialogConfig } from '../shared/default-dialog-config';
+import { UserCredentialsComponent } from '../shared/user-credentials/user-credentials.component';
 
 @Component({
   selector: 'app-navbar',
@@ -41,11 +49,50 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private store: Store<AppState>,
-    private router: Router
+    private store: Store<AuthState>,
+    private router: Router,
+    private dialog: MatDialog
   ) {
     const theme = localStorage.getItem('diploma-thesis.theme');
     if (theme) this.changeTheme(theme);
+    this.userInitials$ = this.store.pipe(select(selectUserInitials));
+    this.store
+      .pipe(select(getLoggedUserData))
+      .pipe(tap((user) => (this.user = user)))
+      .subscribe();
+  }
+
+  user!: User;
+
+  userInitials$!: Observable<string>;
+
+  changeCredentials() {
+    const dialogConfig = defaultDialogConfig();
+
+    dialogConfig.data = {
+      dialogTitle: 'Update User Credentials',
+      user: this.user,
+      mode: 'update-credentials',
+    };
+
+    this.dialog.open(UserCredentialsComponent, {
+      ...dialogConfig,
+      disableClose: false,
+    });
+  }
+  changePassword() {
+    const dialogConfig = defaultDialogConfig();
+
+    dialogConfig.data = {
+      dialogTitle: 'Update User Password',
+      user: this.user,
+      mode: 'update-password',
+    };
+
+    this.dialog.open(UserCredentialsComponent, {
+      ...dialogConfig,
+      disableClose: false,
+    });
   }
 
   ngOnInit(): void {

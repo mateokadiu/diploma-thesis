@@ -7,19 +7,16 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
-import { catchError, Subject, takeUntil, tap, throwError } from 'rxjs';
-import { AppState } from 'src/app/reducers';
-import { AuthService } from 'src/app/services/auth.service';
+import { catchError, Subject, takeUntil, throwError } from 'rxjs';
 import { MatchPassword } from 'src/app/validators/match-password.validator';
-import { signup } from '../actions/auth-actions';
+import { UserEntityService } from '../../services/user/user-entity.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  selector: 'app-register-user',
+  templateUrl: './register-user.component.html',
+  styleUrls: ['./register-user.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class RegisterUserComponent implements OnInit {
   signupForm: FormGroup;
 
   hidePassword = true;
@@ -29,18 +26,21 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<AppState>,
+    // private store: Store<AppState>,
     private title: Title,
     private matchPassword: MatchPassword,
-    private authService: AuthService,
+    private userEntityService: UserEntityService,
+    // private authService: AuthService,
     private _snackBar: MatSnackBar
   ) {
-    title.setTitle('Signup');
+    title.setTitle('Admin - Create User');
     this.signupForm = fb.group(
       {
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         email: ['', [Validators.email, Validators.required]],
+        gender: ['', Validators.required],
+        dateOfBirth: ['', Validators.required],
         role: ['', [Validators.required]],
         password: [
           '',
@@ -63,19 +63,29 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService
-      .signup(this.signupForm.value)
+    this.userEntityService
+      .add(this.signupForm.value)
       .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        }),
-        tap((user) => this.store.dispatch(signup({ user }))),
+        catchError((err) => throwError(() => err)),
         takeUntil(this.destroy$)
       )
       .subscribe({
-        error: ({ error }) => this._snackBar.open(error.message, 'OK'),
-        complete: () => this._snackBar.open('Signed up successfully!', 'OK'),
+        error: ({ error }) => this._snackBar.open(error.error.message, 'OK'),
+        complete: () => this._snackBar.open('User created successfully!', 'OK'),
       });
+    // this.authService
+    //   .signup(this.signupForm.value)
+    //   .pipe(
+    //     catchError((err) => {
+    //       return throwError(() => err);
+    //     }),
+    //     // tap((user) => this.store.dispatch(signup({ user }))),
+    //     takeUntil(this.destroy$)
+    //   )
+    //   .subscribe({
+    // error: ({ error }) => this._snackBar.open(error.message, 'OK'),
+    // complete: () => this._snackBar.open('Signed up successfully!', 'OK'),
+    //   });
   }
 
   ngOnInit(): void {}

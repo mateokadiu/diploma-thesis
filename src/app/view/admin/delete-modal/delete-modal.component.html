@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <div>
+    You are deleting '{{ user.email }}'. Click 'Yes' to confirm or 'No' to
+    cancel.
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="onClose()">No</button>
+
+  <button mat-raised-button color="warn" (click)="onSave()">Yes</button>
+</mat-dialog-actions>

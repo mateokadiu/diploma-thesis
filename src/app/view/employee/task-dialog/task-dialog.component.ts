@@ -12,7 +12,7 @@ import { EmployeeTaskEntityService } from '../../services/employee/employee-task
 export class TaskDialogComponent implements OnInit {
   dialogTitle!: string;
   mode!: 'view';
-  task!: Task;
+  task!: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: any,
@@ -31,7 +31,7 @@ export class TaskDialogComponent implements OnInit {
   onSave() {
     if (this.mode === 'view') {
       this.taskEntityService
-        .update({})
+        .update({ _id: this.task.id, status: 'Completed' })
         .pipe(tap(() => this.dialogRef.close()))
         .subscribe(noop);
     }

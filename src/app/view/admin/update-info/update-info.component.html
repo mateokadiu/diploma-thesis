@@ -1,0 +1,154 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <ng-container *ngIf="mode === 'update'">
+    <form [formGroup]="form">
+      <app-input
+        label="First name"
+        inputType="text"
+        iconName="face"
+        [control]="getControl('firstName')"
+      ></app-input>
+      <app-input
+        label="Last name"
+        inputType="text"
+        iconName="face"
+        [control]="getControl('lastName')"
+      ></app-input>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Choose your date of birth</mat-label>
+        <input
+          formControlName="dateOfBirth"
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.controls['dateOfBirth'].hasError('required')">
+          Date of birth is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Select a gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['gender'].hasError('required')">
+          gender is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Select a user role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="Admin">Admin</mat-option>
+          <mat-option value="Manager">Manager</mat-option>
+          <mat-option value="Employee">Employee</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['role'].hasError('required')">
+          User role is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="mode === 'password'">
+    <form [formGroup]="form">
+      <mat-form-field class="full-width">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword"
+        >
+          <mat-icon matSuffix>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error *ngIf="form.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="form.controls['password'].hasError('minlength')">
+          Password should be with
+          <strong>at least 10 characters</strong> </mat-error
+        ><mat-error
+          *ngIf="
+            form.controls['password'].hasError('pattern') &&
+            !form.controls['password'].hasError('minlength')
+          "
+        >
+          Password must contain a <strong>symbol</strong>,
+          <strong>number</strong>, <strong>uppercase letter</strong> and
+          <strong>lowercase letter</strong>.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Confirm your password</mat-label>
+        <input
+          matInput
+          [type]="hideConfirm ? 'password' : 'text'"
+          placeholder="Confirm your password"
+          formControlName="confirmPassword"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hideConfirm = !hideConfirm"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideConfirm"
+        >
+          <mat-icon matSuffix>{{
+            hideConfirm ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="form.controls['confirmPassword'].hasError('required')"
+        >
+          Password confirmation is <strong>required</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="form.controls['confirmPassword'].hasError('minlength')"
+        >
+          Password confirmation should be with
+          <strong>at least 10 characters</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div
+        *ngIf="
+          form.get('password')?.touched &&
+          form.get('confirmPassword')?.touched &&
+          form.errors
+        "
+      >
+        <mat-error *ngIf="form.errors?.['passwordsDontMatch']">
+          Passwords <strong>do not match</strong>
+        </mat-error>
+      </div>
+    </form>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-flat-button (click)="onClose()" color="accent">Close</button>
+  <button
+    mat-flat-button
+    [disabled]="form.invalid"
+    (click)="onInfoUpdate()"
+    color="primary"
+  >
+    Update
+  </button>
+</mat-dialog-actions>

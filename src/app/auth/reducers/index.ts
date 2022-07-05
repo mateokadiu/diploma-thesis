@@ -8,7 +8,6 @@ import {
   on,
 } from '@ngrx/store';
 import { User } from 'src/app/interfaces/user.interface';
-import { logout } from 'src/app/reducers';
 import { AuthActions } from '../actions';
 
 export const authFeatureKey = 'auth';
@@ -26,10 +25,11 @@ export const authReducer = createReducer(
   on(AuthActions.login, (state, action) => {
     return { user: action.user };
   }),
-  on(AuthActions.signup, (state, action) => {
-    return { user: action.user };
-  }),
-  on(logout, (state, action) => {
+
+  on(AuthActions.logout, (state, action) => {
     return { user: undefined };
+  }),
+  on(AuthActions.updateAccount, (state, action) => {
+    return { user: { ...state.user, ...action.user } };
   })
 );

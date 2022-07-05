@@ -74,16 +74,44 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { CanLoadAdminGuard } from &#x27;../guards/users/admin/can-load-admin.guard&#x27;;
+import { CanLoadEmployeeGuard } from &#x27;../guards/users/can-load-employee.guard&#x27;;
+import { CanLoadManagerGuard } from &#x27;../guards/users/can-load-manager.guard&#x27;;
 import { HomeComponent } from &#x27;./home/home.component&#x27;;
+import { EmployeeTasksResolver } from &#x27;./services/employee/employee-tasks.resolver&#x27;;
+import { ManagerTasksResolver } from &#x27;./services/manager/manager-tasks.resolver&#x27;;
+import { UsersResolver } from &#x27;./services/user/users.resolver&#x27;;
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;home&#x27;,
     component: HomeComponent,
+    resolve: {
+      User: UsersResolver,
+      Manager: ManagerTasksResolver,
+      Employee: EmployeeTasksResolver,
+    },
   },
+
   {
-    path: &#x27;task&#x27;,
-    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./task/task.module&#x27;).then((m) &#x3D;&gt; m.TaskModule)&quot;,
+    path: &#x27;admin&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./admin/admin.module&#x27;).then((m) &#x3D;&gt; m.AdminModule)&quot;,
+    canLoad: [CanLoadAdminGuard],
+  },
+
+  {
+    path: &#x27;manager&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./manager/manager.module&#x27;).then((m) &#x3D;&gt; m.ManagerModule)&quot;,
+    canLoad: [CanLoadManagerGuard],
+  },
+
+  {
+    path: &#x27;employee&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./employee/employee.module&#x27;).then((m) &#x3D;&gt; m.EmployeeModule)&quot;,
+    canLoad: [CanLoadEmployeeGuard],
   },
 ];
 

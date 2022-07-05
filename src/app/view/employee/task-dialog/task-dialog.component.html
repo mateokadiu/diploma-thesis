@@ -21,13 +21,17 @@
           </div>
         </div>
         <div>{{ task?.to }}</div>
+        <div>{{ task?.from }}</div>
+        <div>{{ task?.status }}</div>
       </mat-card-content>
     </mat-card>
   </ng-container>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions *ngIf="task?.status == 'Assigned'">
   <button mat-raised-button (click)="onClose()">Close</button>
 
-  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+  <button mat-raised-button color="primary" (click)="onSave()">
+    Mark as Completed
+  </button>
 </mat-dialog-actions>

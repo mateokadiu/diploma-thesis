@@ -1,30 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
 import { delay, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { userId } from 'src/app/auth/selectors/auth.selectors';
 import { User } from 'src/app/interfaces/user.interface';
 import { AppState } from 'src/app/reducers';
+import { defaultDialogConfig } from 'src/app/shared/default-dialog-config';
 import { UserEntityService } from '../../services/user/user-entity.service';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { UpdateModalComponent } from '../update-modal/update-modal.component';
 
 @Component({
   selector: 'app-management-table',
@@ -34,8 +19,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ManagementTableComponent implements OnInit {
   constructor(
     private userEntityService: UserEntityService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private dialog: MatDialog,
+    private title: Title
   ) {
+    title.setTitle('Admin - User Management');
+
     store
       .pipe(
         select(userId),
@@ -44,6 +33,8 @@ export class ManagementTableComponent implements OnInit {
       .subscribe()
       .unsubscribe();
   }
+
+  pageSize: string = '5';
 
   uId!: string;
 
@@ -55,6 +46,8 @@ export class ManagementTableComponent implements OnInit {
     'first-name',
     'last-name',
     'role',
+    'edit',
+    'delete',
   ];
 
   nextPage = 0;
@@ -64,7 +57,7 @@ export class ManagementTableComponent implements OnInit {
     this.userEntityService
       .getWithQuery({
         pageNumber: this.nextPage.toString(),
-        pageSize: '3',
+        pageSize: this.pageSize.toString(),
         _id: this.uId,
       })
       .pipe(
@@ -88,6 +81,34 @@ export class ManagementTableComponent implements OnInit {
         }
       })
     );
+  }
+
+  updateUser(user: User) {
+    const dialogConfig = defaultDialogConfig();
+    dialogConfig.data = {
+      dialogTitle: 'Update User',
+      user,
+      mode: 'update',
+    };
+
+    this.dialog.open(UpdateModalComponent, {
+      ...dialogConfig,
+      disableClose: false,
+    });
+  }
+
+  deleteUser(user: User) {
+    const dialogConfig = defaultDialogConfig();
+    dialogConfig.data = {
+      dialogTitle: 'Delete User',
+      user,
+      mode: 'delete',
+    };
+
+    this.dialog.open(DeleteModalComponent, {
+      ...dialogConfig,
+      disableClose: false,
+    });
   }
 
   ngOnDestroy() {

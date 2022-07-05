@@ -1009,64 +1009,51 @@ export class CalendarComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;dark-mode&quot; style&#x3D;&quot;width: 90%; margin: 0 auto; margin-top: 30px&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;calendar-container dark-mode&quot;&gt;
   &lt;div class&#x3D;&quot;row text-center&quot;&gt;
     &lt;div class&#x3D;&quot;col-md-4&quot;&gt;
-      &lt;div class&#x3D;&quot;btn-group&quot;&gt;
-        &lt;div
-          class&#x3D;&quot;btn btn-primary&quot;
+      &lt;mat-button-toggle-group&gt;
+        &lt;mat-button-toggle
           mwlCalendarPreviousView
           [view]&#x3D;&quot;view&quot;
           [(viewDate)]&#x3D;&quot;viewDate&quot;
           (viewDateChange)&#x3D;&quot;closeOpenMonthViewDay()&quot;
+          &gt;Previous&lt;/mat-button-toggle
         &gt;
-          Previous
-        &lt;/div&gt;
-        &lt;div
-          class&#x3D;&quot;btn btn-outline-secondary&quot;
-          mwlCalendarToday
-          [(viewDate)]&#x3D;&quot;viewDate&quot;
+        &lt;mat-button-toggle mwlCalendarToday [(viewDate)]&#x3D;&quot;viewDate&quot;
+          &gt;Today&lt;/mat-button-toggle
         &gt;
-          Today
-        &lt;/div&gt;
-        &lt;div
-          class&#x3D;&quot;btn btn-primary&quot;
+        &lt;mat-button-toggle
           mwlCalendarNextView
           [view]&#x3D;&quot;view&quot;
           [(viewDate)]&#x3D;&quot;viewDate&quot;
           (viewDateChange)&#x3D;&quot;closeOpenMonthViewDay()&quot;
+          &gt;Next&lt;/mat-button-toggle
         &gt;
-          Next
-        &lt;/div&gt;
-      &lt;/div&gt;
+      &lt;/mat-button-toggle-group&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;col-md-4&quot;&gt;
       &lt;h3&gt;{{ viewDate | calendarDate: view + &quot;ViewTitle&quot;:&quot;en&quot; }}&lt;/h3&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;col-md-4&quot;&gt;
-      &lt;div class&#x3D;&quot;btn-group&quot;&gt;
-        &lt;div
-          class&#x3D;&quot;btn btn-primary&quot;
+      &lt;mat-button-toggle-group&gt;
+        &lt;mat-button-toggle
           (click)&#x3D;&quot;setView(CalendarView.Month)&quot;
-          [class.active]&#x3D;&quot;view &#x3D;&#x3D;&#x3D; CalendarView.Month&quot;
+          [class.mat-button-toggle-checked]&#x3D;&quot;view &#x3D;&#x3D;&#x3D; CalendarView.Month&quot;
         &gt;
           Month
-        &lt;/div&gt;
-        &lt;div
-          class&#x3D;&quot;btn btn-primary&quot;
+        &lt;/mat-button-toggle&gt;
+        &lt;mat-button-toggle
           (click)&#x3D;&quot;setView(CalendarView.Week)&quot;
-          [class.active]&#x3D;&quot;view &#x3D;&#x3D;&#x3D; CalendarView.Week&quot;
+          [class.mat-button-toggle-checked]&#x3D;&quot;view &#x3D;&#x3D;&#x3D; CalendarView.Week&quot;
+          &gt;Week&lt;/mat-button-toggle
         &gt;
-          Week
-        &lt;/div&gt;
-        &lt;div
-          class&#x3D;&quot;btn btn-primary&quot;
+        &lt;mat-button-toggle
           (click)&#x3D;&quot;setView(CalendarView.Day)&quot;
-          [class.active]&#x3D;&quot;view &#x3D;&#x3D;&#x3D; CalendarView.Day&quot;
+          [class.mat-button-toggle-checked]&#x3D;&quot;view &#x3D;&#x3D;&#x3D; CalendarView.Day&quot;
+          &gt;Day&lt;/mat-button-toggle
         &gt;
-          Day
-        &lt;/div&gt;
-      &lt;/div&gt;
+      &lt;/mat-button-toggle-group&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;br /&gt;
@@ -1101,10 +1088,6 @@ export class CalendarComponent implements OnInit {
     &gt;
     &lt;/mwl-calendar-day-view&gt;
   &lt;/div&gt;
-
-  &lt;!-- Everything you see below is just for the demo, you don&#x27;t need to include it in your app --&gt;
-
-  &lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -1113,7 +1096,18 @@ export class CalendarComponent implements OnInit {
                 <p class="comment">
                     <code>./calendar.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">.calendar-container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -1141,8 +1135,8 @@ export class CalendarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="dark-mode" style="width: 90%; margin: 0 auto; margin-top: 30px">  <div class="row text-center">    <div class="col-md-4">      <div class="btn-group">        <div          class="btn btn-primary"          mwlCalendarPreviousView          [view]="view"          [(viewDate)]="viewDate"          (viewDateChange)="closeOpenMonthViewDay()"        >          Previous        </div>        <div          class="btn btn-outline-secondary"          mwlCalendarToday          [(viewDate)]="viewDate"        >          Today        </div>        <div          class="btn btn-primary"          mwlCalendarNextView          [view]="view"          [(viewDate)]="viewDate"          (viewDateChange)="closeOpenMonthViewDay()"        >          Next        </div>      </div>    </div>    <div class="col-md-4">      <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>    </div>    <div class="col-md-4">      <div class="btn-group">        <div          class="btn btn-primary"          (click)="setView(CalendarView.Month)"          [class.active]="view === CalendarView.Month"        >          Month        </div>        <div          class="btn btn-primary"          (click)="setView(CalendarView.Week)"          [class.active]="view === CalendarView.Week"        >          Week        </div>        <div          class="btn btn-primary"          (click)="setView(CalendarView.Day)"          [class.active]="view === CalendarView.Day"        >          Day        </div>      </div>    </div>  </div>  <br />  <div [ngSwitch]="view">    <mwl-calendar-month-view      *ngSwitchCase="CalendarView.Month"      [viewDate]="viewDate"      [events]="events"      [refresh]="refresh"      [activeDayIsOpen]="activeDayIsOpen"      (dayClicked)="dayClicked($event.day)"      (eventClicked)="handleEvent(\'Clicked\', $event.event)"      (eventTimesChanged)="eventTimesChanged($event)"    >    </mwl-calendar-month-view>    <mwl-calendar-week-view      *ngSwitchCase="CalendarView.Week"      [viewDate]="viewDate"      [events]="events"      [refresh]="refresh"      (eventClicked)="handleEvent(\'Clicked\', $event.event)"      (eventTimesChanged)="eventTimesChanged($event)"    >    </mwl-calendar-week-view>    <mwl-calendar-day-view      *ngSwitchCase="CalendarView.Day"      [viewDate]="viewDate"      [events]="events"      [refresh]="refresh"      (eventClicked)="handleEvent(\'Clicked\', $event.event)"      (eventTimesChanged)="eventTimesChanged($event)"    >    </mwl-calendar-day-view>  </div>  <!-- Everything you see below is just for the demo, you don\'t need to include it in your app -->  <br /><br /><br /></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'EventCalendarComponent', 'selector': 'app-event-calendar'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'}];
+        var COMPONENT_TEMPLATE = '<div><div class="calendar-container dark-mode">  <div class="row text-center">    <div class="col-md-4">      <mat-button-toggle-group>        <mat-button-toggle          mwlCalendarPreviousView          [view]="view"          [(viewDate)]="viewDate"          (viewDateChange)="closeOpenMonthViewDay()"          >Previous</mat-button-toggle        >        <mat-button-toggle mwlCalendarToday [(viewDate)]="viewDate"          >Today</mat-button-toggle        >        <mat-button-toggle          mwlCalendarNextView          [view]="view"          [(viewDate)]="viewDate"          (viewDateChange)="closeOpenMonthViewDay()"          >Next</mat-button-toggle        >      </mat-button-toggle-group>    </div>    <div class="col-md-4">      <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>    </div>    <div class="col-md-4">      <mat-button-toggle-group>        <mat-button-toggle          (click)="setView(CalendarView.Month)"          [class.mat-button-toggle-checked]="view === CalendarView.Month"        >          Month        </mat-button-toggle>        <mat-button-toggle          (click)="setView(CalendarView.Week)"          [class.mat-button-toggle-checked]="view === CalendarView.Week"          >Week</mat-button-toggle        >        <mat-button-toggle          (click)="setView(CalendarView.Day)"          [class.mat-button-toggle-checked]="view === CalendarView.Day"          >Day</mat-button-toggle        >      </mat-button-toggle-group>    </div>  </div>  <br />  <div [ngSwitch]="view">    <mwl-calendar-month-view      *ngSwitchCase="CalendarView.Month"      [viewDate]="viewDate"      [events]="events"      [refresh]="refresh"      [activeDayIsOpen]="activeDayIsOpen"      (dayClicked)="dayClicked($event.day)"      (eventClicked)="handleEvent(\'Clicked\', $event.event)"      (eventTimesChanged)="eventTimesChanged($event)"    >    </mwl-calendar-month-view>    <mwl-calendar-week-view      *ngSwitchCase="CalendarView.Week"      [viewDate]="viewDate"      [events]="events"      [refresh]="refresh"      (eventClicked)="handleEvent(\'Clicked\', $event.event)"      (eventTimesChanged)="eventTimesChanged($event)"    >    </mwl-calendar-week-view>    <mwl-calendar-day-view      *ngSwitchCase="CalendarView.Day"      [viewDate]="viewDate"      [events]="events"      [refresh]="refresh"      (eventClicked)="handleEvent(\'Clicked\', $event.event)"      (eventTimesChanged)="eventTimesChanged($event)"    >    </mwl-calendar-day-view>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'DeleteModalComponent', 'selector': 'app-delete-modal'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManagementTableComponent', 'selector': 'app-management-table'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'RegisterUserComponent', 'selector': 'app-register-user'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TaskCalendarComponent', 'selector': 'app-task-calendar'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'},{'name': 'TaskManagementComponent', 'selector': 'app-task-management'},{'name': 'UpdateInfoComponent', 'selector': 'app-update-info'},{'name': 'UpdateModalComponent', 'selector': 'app-update-modal'},{'name': 'UserCredentialsComponent', 'selector': 'app-user-credentials'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CalendarComponent'};
 </script>

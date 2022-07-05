@@ -171,12 +171,12 @@ export const authReducer &#x3D; createReducer(
   on(AuthActions.login, (state, action) &#x3D;&gt; {
     return { user: action.user };
   }),
-  on(AuthActions.signup, (state, action) &#x3D;&gt; {
-    return { user: action.user };
-  }),
+
   on(AuthActions.logout, (state, action) &#x3D;&gt; {
-    console.log(&#x27;here&#x27;);
     return { user: undefined };
+  }),
+  on(AuthActions.updateAccount, (state, action) &#x3D;&gt; {
+    return { user: { ...state.user, ...action.user } };
   })
 );
 </code></pre>

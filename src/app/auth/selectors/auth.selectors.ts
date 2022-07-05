@@ -40,3 +40,8 @@ export const userId = createSelector(
   getLoggedUserData,
   (userData) => userData?._id as string
 );
+
+export const selectUserInitials = createSelector(
+  getLoggedUserData,
+  (user) => user?.firstName[0].toUpperCase() + user?.lastName[0].toUpperCase()
+);

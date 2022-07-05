@@ -1,0 +1,43 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Assigned">
+    <ng-container *ngFor="let assign of assigned$">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            {{ assign?.title }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="card-image assigned"></div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-tab>
+  <mat-tab label="Completed">
+    <ng-container *ngFor="let complete of completed$">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            {{ complete?.title }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="card-image completed"></div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-tab>
+  <mat-tab label="Failed">
+    <ng-container *ngFor="let fail of failed$">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            {{ fail?.title }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="card-image failed"></div>
+        </mat-card-content>
+      </mat-card> </ng-container
+  ></mat-tab>
+</mat-tab-group>

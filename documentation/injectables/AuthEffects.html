@@ -83,9 +83,6 @@
                             <li>
                                 <a href="#logout$" >logout$</a>
                             </li>
-                            <li>
-                                <a href="#signup$" >signup$</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -124,7 +121,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/auth/effects/auth.effects.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/auth/effects/auth.effects.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -211,8 +208,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/app/auth/effects/auth.effects.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/auth/effects/auth.effects.ts:34</a></div>
                 </td>
             </tr>
 
@@ -299,7 +296,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/auth/effects/auth.effects.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/auth/effects/auth.effects.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -322,10 +319,9 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(AuthActions.logout),
+        ofType(logout),
         tap((action) &#x3D;&gt; {
           localStorage.removeItem(&#x27;diploma-thesis.user&#x27;);
-          console.log(&#x27;hereeee&#x27;);
           this.router
             .navigateByUrl(&#x27;/login&#x27;)
             .then(() &#x3D;&gt; this.openSnackBar(&#x27;Logged Out Successfully!&#x27;));
@@ -337,47 +333,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/auth/effects/auth.effects.ts:53</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="signup$"></a>
-                    <span class="name">
-                        <span ><b>signup$</b></span>
-                        <a href="#signup$"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>createEffect(
-    () &#x3D;&gt;
-      this.actions$.pipe(
-        ofType(AuthActions.signup),
-        tap((action) &#x3D;&gt; {
-          localStorage.setItem(
-            &#x27;diploma-thesis.user&#x27;,
-            JSON.stringify(action?.user)
-          );
-          this.router.navigateByUrl(&#x27;/view/home&#x27;).then();
-        })
-      ),
-    {
-      dispatch: false,
-    }
-  )</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/auth/effects/auth.effects.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/auth/effects/auth.effects.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -396,6 +352,7 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { tap } from &#x27;rxjs&#x27;;
 import { AuthActions } from &#x27;../actions&#x27;;
+import { logout } from &#x27;../actions/auth-actions&#x27;;
 
 @Injectable()
 export class AuthEffects {
@@ -422,33 +379,15 @@ export class AuthEffects {
     }
   );
 
-  signup$ &#x3D; createEffect(
-    () &#x3D;&gt;
-      this.actions$.pipe(
-        ofType(AuthActions.signup),
-        tap((action) &#x3D;&gt; {
-          localStorage.setItem(
-            &#x27;diploma-thesis.user&#x27;,
-            JSON.stringify(action?.user)
-          );
-          this.router.navigateByUrl(&#x27;/view/home&#x27;).then();
-        })
-      ),
-    {
-      dispatch: false,
-    }
-  );
-
   openSnackBar(message: string) {
-    this._snackBar.open(message, &#x27;OK&#x27;, { duration: 3000 });
+    this._snackBar.open(message, &#x27;OK&#x27;, { duration: 2000 });
   }
   logout$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(AuthActions.logout),
+        ofType(logout),
         tap((action) &#x3D;&gt; {
           localStorage.removeItem(&#x27;diploma-thesis.user&#x27;);
-          console.log(&#x27;hereeee&#x27;);
           this.router
             .navigateByUrl(&#x27;/login&#x27;)
             .then(() &#x3D;&gt; this.openSnackBar(&#x27;Logged Out Successfully!&#x27;));

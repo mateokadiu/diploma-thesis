@@ -61,6 +61,6 @@ export class UserDataService extends DefaultDataService<User> {
   }
 
   override delete(key: string): Observable<any> {
-    return this.http.delete<any>(`http://localhost:3000/api/users/${key}`);
+    return this.http.delete<any>(`http://localhost:3000/api/user/${key}`);
   }
 }

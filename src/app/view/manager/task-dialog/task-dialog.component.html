@@ -16,7 +16,7 @@
         <input
           matInput
           [ngxMatDatetimePicker]="picker"
-          placeholder="Choose a date"
+          placeholder="Choose a start date"
           formControlName="start"
           [min]="minDate"
           [max]="maxDate"
@@ -45,7 +45,7 @@
         <input
           matInput
           [ngxMatDatetimePicker]="picker2"
-          placeholder="Choose a date"
+          placeholder="Choose an end date"
           formControlName="end"
           [min]="minDate"
           [max]="maxDate"
@@ -76,12 +76,12 @@
           <input matInput type="color" formControlName="primary" />
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>Choose a primary color</mat-label>
+          <mat-label>Choose a secondary color</mat-label>
           <input matInput type="color" formControlName="secondary" />
         </mat-form-field>
       </ng-container>
       <mat-form-field appearance="fill">
-        <mat-label>Autosize textarea</mat-label>
+        <mat-label>Description</mat-label>
         <textarea
           matInput
           cdkTextareaAutosize
@@ -92,7 +92,7 @@
         ></textarea>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
+        <mat-label>Select a user</mat-label>
         <mat-select [(value)]="selected" formControlName="to">
           <ng-container *ngFor="let u of users">
             <mat-option [value]="u.email">
@@ -129,17 +129,29 @@
       </mat-card-content>
     </mat-card>
   </ng-container>
+
+  <ng-container *ngIf="mode === 'delete'"></ng-container>
 </mat-dialog-content>
 
 <mat-dialog-actions *ngIf="mode !== 'view'">
   <button mat-raised-button (click)="onClose()">Close</button>
 
   <button
+    *ngIf="mode !== 'delete'"
     mat-raised-button
     color="primary"
     [disabled]="!form?.valid || (this.loading$ | async)"
     (click)="onSave()"
   >
     Save
+  </button>
+
+  <button
+    *ngIf="mode === 'delete'"
+    mat-raised-button
+    color="warn"
+    (click)="onSave()"
+  >
+    Delete
   </button>
 </mat-dialog-actions>

@@ -17,8 +17,6 @@ export interface AppState {
   entityCache?: any;
 }
 
-export const logout = createAction('[Logout Link] User Logout');
-
 export const reducers: ActionReducerMap<AppState> = {};
 
 export function logoutFunction(

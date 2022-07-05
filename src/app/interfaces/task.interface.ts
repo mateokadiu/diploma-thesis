@@ -2,7 +2,7 @@ export interface Task {
   _id?: string;
   userId?: string;
   start: Date;
-  end?: Date;
+  end: Date;
   from: string;
   title: string;
   color: {
@@ -15,6 +15,7 @@ export interface Task {
     beforeStart?: boolean;
     afterEnd?: boolean;
   };
+  status?: string;
   draggable?: boolean;
   description: string;
   to: string;

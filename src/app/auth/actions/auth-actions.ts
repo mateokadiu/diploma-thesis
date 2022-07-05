@@ -6,7 +6,9 @@ export const login = createAction(
   props<AuthState>()
 );
 
-export const signup = createAction(
-  '[Signup Page] User Signup',
-  props<AuthState>()
+export const logout = createAction('[Logout Link] User Logout');
+
+export const updateAccount = createAction(
+  '[User Settings Modal] User Edit',
+  props<{ user: any }>()
 );

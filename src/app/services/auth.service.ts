@@ -19,13 +19,20 @@ export class AuthService {
     return this.http.post<User>(`${this.DB_URL}/signup`, user);
   }
 
-  getAllUsers() {
-    return this.http.get<{ payload: User[] }>(`${this.DB_URL}/users`);
+  changePassword(data: any) {
+    return this.http.post<any>(`${this.DB_URL}/change-password/${data._id}`, {
+      password: data.password,
+      newPassword: data.newPassword,
+    });
+  }
+
+  editUser(user: any) {
+    return this.http.patch<User>(`${this.DB_URL}/user/${user._id}`, user);
   }
 
   deleteAccount(userId: string) {
     return this.http.delete<{ message: string }>(
-      `${this.DB_URL}/users/${userId}`
+      `${this.DB_URL}/user/${userId}`
     );
   }
 }

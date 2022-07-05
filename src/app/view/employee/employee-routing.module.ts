@@ -7,7 +7,6 @@ const routes: Routes = [
   {
     path: 'task',
     component: TaskCalendarComponent,
-    resolve: { EmployeeTasksResolver },
   },
 ];
 

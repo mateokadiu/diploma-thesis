@@ -27,7 +27,17 @@ export class TaskCalendarComponent implements OnInit {
         tap((val) => {
           this.events = [];
           val.forEach(
-            ({ start, end, title, color, _id, description, to, from }) => {
+            ({
+              start,
+              end,
+              title,
+              color,
+              _id,
+              description,
+              to,
+              from,
+              status,
+            }) => {
               this.events.push({
                 start: new Date(start),
                 title,
@@ -39,6 +49,7 @@ export class TaskCalendarComponent implements OnInit {
                 id: _id,
                 to,
                 from,
+                status,
               });
             }
           );

@@ -304,8 +304,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/app/auth/login/login.component.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/app/auth/login/login.component.ts:82</a></div>
                 </td>
             </tr>
 
@@ -373,8 +373,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/app/auth/login/login.component.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/auth/login/login.component.ts:88</a></div>
                 </td>
             </tr>
 
@@ -410,8 +410,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">src/app/auth/login/login.component.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/app/auth/login/login.component.ts:86</a></div>
                 </td>
             </tr>
 
@@ -630,8 +630,12 @@ export class LoginComponent implements OnInit {
         takeUntil(this.destroy$)
       )
       .subscribe({
-        error: ({ error }) &#x3D;&gt; this._snackBar.open(error.message, &#x27;OK&#x27;),
-        complete: () &#x3D;&gt; this._snackBar.open(&#x27;Logged in successfully!&#x27;, &#x27;OK&#x27;),
+        error: ({ error }) &#x3D;&gt;
+          this._snackBar.open(error.message, &#x27;OK&#x27;, { duration: 2000 }),
+        complete: () &#x3D;&gt;
+          this._snackBar.open(&#x27;Logged in successfully!&#x27;, &#x27;OK&#x27;, {
+            duration: 2000,
+          }),
       });
   }
 
@@ -701,8 +705,8 @@ export class LoginComponent implements OnInit {
       &lt;/mat-form-field&gt;
 
       &lt;button
-        mat-button
-        color&#x3D;&quot;primary&quot;
+        mat-raised-button
+        color&#x3D;&quot;accent&quot;
         (click)&#x3D;&quot;onSubmit()&quot;
         [disabled]&#x3D;&quot;loginForm.pristine || loginForm.invalid&quot;
       &gt;
@@ -757,12 +761,10 @@ export class LoginComponent implements OnInit {
   font-size: 1.5rem;
 }
 
-.mat-button {
+.mat-raised-button {
   margin-top: 10px;
   width: 100%;
-  color: #fff !important;
   height: 40px;
-  background-color: #3f51b5;
 }
 
 @media screen and (max-width: 600px) {
@@ -798,8 +800,8 @@ export class LoginComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><form [formGroup]="loginForm" class="center-content">  <mat-card class="example-card">    <mat-card-header>      <mat-card-title class="mat-card-header">Login</mat-card-title>    </mat-card-header>    <mat-card-content>      <app-input        label="Email"        inputType="email"        iconName="email"        [control]="getControl(\'email\')"      ></app-input>      <mat-form-field class="full-width">        <mat-label>Enter your password</mat-label>        <input          matInput          [type]="hide ? \'password\' : \'text\'"          placeholder="Enter password"          formControlName="password"        />        <button          mat-icon-button          matSuffix          (click)="hide = !hide"          [attr.aria-label]="\'Hide password\'"          [attr.aria-pressed]="hide"        >          <mat-icon matSuffix>{{            hide ? "visibility_off" : "visibility"          }}</mat-icon>        </button>        <mat-error *ngIf="loginForm.controls[\'password\'].hasError(\'required\')">          Password is <strong>required</strong>        </mat-error>        <mat-error *ngIf="loginForm.controls[\'password\'].hasError(\'minlength\')">          Password should be with <strong>at least 10 characters</strong>        </mat-error>        <mat-error          *ngIf="            loginForm.controls[\'password\'].hasError(\'pattern\') &&            !loginForm.controls[\'password\'].hasError(\'minlength\')          "        >          Password must contain a <strong>symbol</strong>,          <strong>number</strong>, <strong>uppercase letter</strong> and          <strong>lowercase letter</strong>.        </mat-error>      </mat-form-field>      <button        mat-button        color="primary"        (click)="onSubmit()"        [disabled]="loginForm.pristine || loginForm.invalid"      >        Login      </button>    </mat-card-content>  </mat-card></form></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'EventCalendarComponent', 'selector': 'app-event-calendar'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'}];
+        var COMPONENT_TEMPLATE = '<div><form [formGroup]="loginForm" class="center-content">  <mat-card class="example-card">    <mat-card-header>      <mat-card-title class="mat-card-header">Login</mat-card-title>    </mat-card-header>    <mat-card-content>      <app-input        label="Email"        inputType="email"        iconName="email"        [control]="getControl(\'email\')"      ></app-input>      <mat-form-field class="full-width">        <mat-label>Enter your password</mat-label>        <input          matInput          [type]="hide ? \'password\' : \'text\'"          placeholder="Enter password"          formControlName="password"        />        <button          mat-icon-button          matSuffix          (click)="hide = !hide"          [attr.aria-label]="\'Hide password\'"          [attr.aria-pressed]="hide"        >          <mat-icon matSuffix>{{            hide ? "visibility_off" : "visibility"          }}</mat-icon>        </button>        <mat-error *ngIf="loginForm.controls[\'password\'].hasError(\'required\')">          Password is <strong>required</strong>        </mat-error>        <mat-error *ngIf="loginForm.controls[\'password\'].hasError(\'minlength\')">          Password should be with <strong>at least 10 characters</strong>        </mat-error>        <mat-error          *ngIf="            loginForm.controls[\'password\'].hasError(\'pattern\') &&            !loginForm.controls[\'password\'].hasError(\'minlength\')          "        >          Password must contain a <strong>symbol</strong>,          <strong>number</strong>, <strong>uppercase letter</strong> and          <strong>lowercase letter</strong>.        </mat-error>      </mat-form-field>      <button        mat-raised-button        color="accent"        (click)="onSubmit()"        [disabled]="loginForm.pristine || loginForm.invalid"      >        Login      </button>    </mat-card-content>  </mat-card></form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'DeleteModalComponent', 'selector': 'app-delete-modal'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManagementTableComponent', 'selector': 'app-management-table'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'RegisterUserComponent', 'selector': 'app-register-user'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TaskCalendarComponent', 'selector': 'app-task-calendar'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'},{'name': 'TaskDialogComponent', 'selector': 'app-task-dialog'},{'name': 'TaskManagementComponent', 'selector': 'app-task-management'},{'name': 'UpdateInfoComponent', 'selector': 'app-update-info'},{'name': 'UpdateModalComponent', 'selector': 'app-update-modal'},{'name': 'UserCredentialsComponent', 'selector': 'app-user-credentials'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>

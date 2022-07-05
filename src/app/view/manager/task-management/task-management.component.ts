@@ -27,8 +27,6 @@ export class TaskManagementComponent implements OnInit {
       label: `<i class="fas fa-fw fa-trash-alt"></i>`,
       a11yLabel: 'Delete',
       onClick: ({ event }: { event: CalendarEvent<Task> }): void => {
-        this.tasksEntityService.delete(event.id as string);
-        this.events = this.events.filter((iEvent) => iEvent !== event);
         this.handleEvent('Deleted', event);
       },
     },
@@ -48,7 +46,17 @@ export class TaskManagementComponent implements OnInit {
         tap((val) => {
           this.events = [];
           val.forEach(
-            ({ start, end, title, color, _id, description, to, from }) => {
+            ({
+              start,
+              end,
+              title,
+              color,
+              _id,
+              description,
+              to,
+              from,
+              status,
+            }) => {
               this.events.push({
                 start: new Date(start),
                 title,
@@ -61,6 +69,7 @@ export class TaskManagementComponent implements OnInit {
                 id: _id,
                 to,
                 from,
+                status,
               });
             }
           );
@@ -97,6 +106,17 @@ export class TaskManagementComponent implements OnInit {
         dialogTitle: 'Edit Task',
         event,
         mode: 'update',
+      };
+
+      this.dialog.open(TaskDialogComponent, {
+        ...dialogConfig,
+        disableClose: false,
+      });
+    } else if (action === 'Deleted') {
+      dialogConfig.data = {
+        dialogTitle: 'Delete Task',
+        event,
+        mode: 'delete',
       };
 
       this.dialog.open(TaskDialogComponent, {

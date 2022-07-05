@@ -5,14 +5,19 @@ import { Update } from '@ngrx/entity';
 import { select, Store } from '@ngrx/store';
 import {
   distinctUntilChanged,
+  map,
   Observable,
   Subject,
   takeUntil,
   tap,
 } from 'rxjs';
 import { AuthState } from 'src/app/auth/reducers';
-import { selectEmail } from 'src/app/auth/selectors/auth.selectors';
+import {
+  getLoggedUserData,
+  selectEmail,
+} from 'src/app/auth/selectors/auth.selectors';
 import { Task } from 'src/app/interfaces/task.interface';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Injectable()
 export class EmployeeTaskDataService extends DefaultDataService<Task> {
@@ -26,10 +31,10 @@ export class EmployeeTaskDataService extends DefaultDataService<Task> {
     super('Employee', http, httpUrlGenerator);
     store
       .pipe(
-        select(selectEmail),
+        select(getLoggedUserData),
         tap((e) => {
           if (e) {
-            this.email = e;
+            this.user = e;
           }
         }),
         takeUntil(this.destroy$),
@@ -38,12 +43,21 @@ export class EmployeeTaskDataService extends DefaultDataService<Task> {
       .subscribe();
   }
 
-  email!: string;
+  user!: User;
 
   override getAll(): Observable<Task[]> {
-    return this.http.get<Task[]>(
-      `http://localhost:3000/api/tasks/employee/${this.email}`
-    );
+    return this.http
+      .get<Task[]>(
+        `http://localhost:3000/api/tasks/employee/${this.user?.email}`
+      )
+      .pipe(
+        map((data) => {
+          if (this.user.role === 'Employee') {
+            return data;
+          }
+          return [];
+        })
+      );
   }
 
   override update(update: Update<Task>): Observable<Task> {

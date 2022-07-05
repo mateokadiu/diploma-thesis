@@ -3,8 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs';
-import { logout } from 'src/app/reducers';
 import { AuthActions } from '../actions';
+import { logout } from '../actions/auth-actions';
 
 @Injectable()
 export class AuthEffects {
@@ -18,23 +18,6 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.login),
-        tap((action) => {
-          localStorage.setItem(
-            'diploma-thesis.user',
-            JSON.stringify(action?.user)
-          );
-          this.router.navigateByUrl('/view/home').then();
-        })
-      ),
-    {
-      dispatch: false,
-    }
-  );
-
-  signup$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.signup),
         tap((action) => {
           localStorage.setItem(
             'diploma-thesis.user',

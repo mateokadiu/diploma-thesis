@@ -4,6 +4,8 @@ import { CanLoadAdminGuard } from '../guards/users/admin/can-load-admin.guard';
 import { CanLoadEmployeeGuard } from '../guards/users/can-load-employee.guard';
 import { CanLoadManagerGuard } from '../guards/users/can-load-manager.guard';
 import { HomeComponent } from './home/home.component';
+import { EmployeeTasksResolver } from './services/employee/employee-tasks.resolver';
+import { ManagerTasksResolver } from './services/manager/manager-tasks.resolver';
 import { UsersResolver } from './services/user/users.resolver';
 
 const routes: Routes = [
@@ -12,6 +14,8 @@ const routes: Routes = [
     component: HomeComponent,
     resolve: {
       User: UsersResolver,
+      Manager: ManagerTasksResolver,
+      Employee: EmployeeTasksResolver,
     },
   },
 

@@ -17,21 +17,41 @@
         [control]="getControl('lastName')"
       ></app-input>
 
-      <!-- <mat-form-field style="width: 100%" appearance="fill">
-        <mat-label>Cars</mat-label>
-        <select matNativeControl required>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-      </mat-form-field> -->
       <app-input
         label="Email"
         inputType="email"
         iconName="email"
         [control]="getControl('email')"
       ></app-input>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Choose your date of birth</mat-label>
+        <input
+          formControlName="dateOfBirth"
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="signupForm.controls['dateOfBirth'].hasError('required')"
+        >
+          Date of birth is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Select a gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="signupForm.controls['gender'].hasError('required')">
+          Gender is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Select a user role</mat-label>

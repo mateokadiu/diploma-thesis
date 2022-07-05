@@ -10,7 +10,6 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="login" routerLinkActive="active">Login</a>
-      <a mat-list-item routerLink="signup" routerLinkActive="active">Signup</a>
       <a mat-list-item routerLink="view/home" routerLinkActive="active">Home</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -37,12 +36,6 @@
             ><mat-icon>input</mat-icon> Login</a
           >
           <a
-            *ngIf="isLoggedOut$ | async"
-            routerLink="signup"
-            routerLinkActive="active"
-            ><mat-icon>how_to_reg</mat-icon>Signup</a
-          >
-          <a
             *ngIf="isLoggedIn$ | async"
             routerLink="view/home"
             routerLinkActive="active"
@@ -60,6 +53,12 @@
             routerLinkActive="active"
             ><mat-icon>home</mat-icon>User Management</a
           >
+          <a
+            *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)"
+            routerLink="view/admin/register-user"
+            routerLinkActive="active"
+            ><mat-icon>face</mat-icon>Create a User</a
+          >
 
           <a
             *ngIf="(isLoggedIn$ | async) && (isEmployee$ | async)"
@@ -67,24 +66,44 @@
             routerLinkActive="active"
             ><mat-icon>home</mat-icon>Employee Task</a
           >
-          <a
-            *ngIf="isLoggedIn$ | async"
-            (click)="logout()"
-            routerLinkActive="active"
-            ><mat-icon>logout</mat-icon>Logout</a
-          >
         </div>
+
+        <button
+          color="accent"
+          *ngIf="isLoggedIn$ | async"
+          class="user-settings-button"
+          matTooltip="User settings"
+          [matMenuTriggerFor]="menu2"
+        >
+          {{ userInitials$ | async }}
+        </button>
+
         <button
           mat-icon-button
           class="mat-menu-button-theme"
           matTooltip="Select a theme"
           [matMenuTriggerFor]="menu"
-          aria-label="Example icon-button with a menu"
         >
           <mat-icon> format_color_fill</mat-icon>
         </button>
       </div>
     </mat-toolbar>
+
+    <mat-menu class="mat-menu-user-settings" #menu2="matMenu">
+      <button
+        mat-menu-item
+        class="settings-button"
+        (click)="changeCredentials()"
+      >
+        <mat-icon>supervisor_account</mat-icon>Change Credentials
+      </button>
+      <button mat-menu-item class="settings-button" (click)="changePassword()">
+        <mat-icon>lock</mat-icon> Change Password
+      </button>
+      <button mat-menu-item (click)="logout()" class="settings-button">
+        <mat-icon>logout</mat-icon>Logout
+      </button>
+    </mat-menu>
 
     <mat-menu #menu="matMenu">
       <button

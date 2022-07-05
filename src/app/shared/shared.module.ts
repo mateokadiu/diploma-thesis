@@ -9,15 +9,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CalendarComponent } from './calendar/calendar.component';
+import { TabComponent } from './tab/tab.component';
+import { UserCredentialsComponent } from './user-credentials/user-credentials.component';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
-  declarations: [InputComponent, CalendarComponent],
+  declarations: [
+    InputComponent,
+    CalendarComponent,
+    TabComponent,
+    UserCredentialsComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -34,8 +43,16 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatDatepickerModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
+    MatCardModule,
     MatButtonModule,
+    MatSelectModule,
   ],
-  exports: [InputComponent, CalendarComponent],
+  exports: [
+    InputComponent,
+    CalendarComponent,
+    TabComponent,
+    UserCredentialsComponent,
+  ],
 })
 export class SharedModule {}

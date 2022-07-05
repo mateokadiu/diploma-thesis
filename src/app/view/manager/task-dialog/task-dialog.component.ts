@@ -8,9 +8,18 @@ import {
 } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store, select } from '@ngrx/store';
 import { id } from 'date-fns/locale';
-import { take, Observable, tap, noop } from 'rxjs';
+import {
+  take,
+  Observable,
+  tap,
+  noop,
+  takeUntil,
+  catchError,
+  throwError,
+} from 'rxjs';
 import { AuthState } from 'src/app/auth/reducers';
 import {
   getLoggedUserData,
@@ -54,7 +63,7 @@ export class TaskDialogComponent implements OnInit {
 
   task!: Task;
 
-  mode!: 'create' | 'update' | 'view';
+  mode!: 'create' | 'update' | 'view' | 'delete';
 
   loading$!: Observable<boolean>;
 
@@ -82,6 +91,7 @@ export class TaskDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<TaskDialogComponent>,
     private store: Store<AuthState>,
     @Inject(MAT_DIALOG_DATA) data: any,
+    private _snackBar: MatSnackBar,
     private taskEntityService: ManagerTaskEntityService,
     private userEntityService: UserEntityService,
     private _ngZone: NgZone
@@ -110,8 +120,7 @@ export class TaskDialogComponent implements OnInit {
       to: ['', Validators.required],
     };
 
-    if (this.mode === 'view') {
-    } else if (this.mode == 'update') {
+    if (this.mode == 'update') {
       this.form = this.fb.group({ ...formControls });
       this.form.patchValue({ ...data.event });
     } else if (this.mode == 'create') {
@@ -139,7 +148,7 @@ export class TaskDialogComponent implements OnInit {
   onSave() {
     const task: any = {
       ...this.task,
-      ...this.form.value,
+      ...this.form?.value,
     };
 
     if (this.mode == 'update') {
@@ -170,6 +179,20 @@ export class TaskDialogComponent implements OnInit {
         })
         .pipe(tap((val) => this.dialogRef.close(val)))
         .subscribe(noop);
+    } else if (this.mode == 'delete') {
+      this.taskEntityService
+        .delete(task.id as string)
+        .pipe(catchError((err) => throwError(() => err)))
+        .subscribe({
+          error: (err) =>
+            this._snackBar.open(err.error.message, 'OK', { duration: 2000 }),
+          complete: () => {
+            this._snackBar.open('Task deleted successfully!', 'OK', {
+              duration: 2000,
+            });
+            this.dialogRef.close();
+          },
+        });
     }
   }
 }

@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <button mat-stroked-button color="primary" (click)="onUpdate()">
+    Edit User
+  </button>
+  <button mat-stroked-button color="accent" (click)="onPassword()">
+    Change Password
+  </button>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="onClose()">Close</button>
+</mat-dialog-actions>

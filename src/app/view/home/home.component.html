@@ -6,3 +6,31 @@
     </div>
   </div>
 </header>
+
+<div class="employee-tab">
+  <app-tab
+    *ngIf="user?.role == 'Employee'"
+    [assigned$]="assigned$ | async"
+    [completed$]="completed$ | async"
+    [failed$]="failed$ | async"
+  ></app-tab>
+</div>
+
+<div class="manager-tabs-container" *ngIf="user?.role == 'Manager'">
+  <mat-form-field class="tabs-selector" appearance="fill">
+    <mat-label>Select a user</mat-label>
+    <mat-select [(value)]="selectedEmail">
+      <ng-container *ngFor="let u of users$ | async">
+        <mat-option [value]="u.email">
+          {{ u?.email }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+
+  <app-tab
+    [assigned$]="assignedUser$ | async | filterState: selectedEmail"
+    [completed$]="completedUser$ | async | filterState: selectedEmail"
+    [failed$]="failedUser$ | async | filterState: selectedEmail"
+  ></app-tab>
+</div>

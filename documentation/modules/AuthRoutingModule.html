@@ -77,11 +77,9 @@ import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { NotAuthGuard } from &#x27;../guards/not-auth.guard&#x27;;
 import { NotFoundComponent } from &#x27;../not-found/not-found.component&#x27;;
 import { LoginComponent } from &#x27;./login/login.component&#x27;;
-import { SignupComponent } from &#x27;./signup/signup.component&#x27;;
 
 const routes: Routes &#x3D; [
   { path: &#x27;login&#x27;, component: LoginComponent, canActivate: [NotAuthGuard] },
-  { path: &#x27;signup&#x27;, component: SignupComponent, canActivate: [NotAuthGuard] },
   { path: &#x27;&#x27;, redirectTo: &#x27;/login&#x27;, pathMatch: &#x27;full&#x27; },
   { path: &#x27;**&#x27;, component: NotFoundComponent },
 ];
