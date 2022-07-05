@@ -16,7 +16,7 @@ const router: Router = express.Router();
 
 router.get("/api/users/:role/:email", [], getUsersHandler);
 
-router.delete("/api/users/:_id", findUserMiddleware, deleteUserHandler);
+router.delete("/api/user/:_id", findUserMiddleware, deleteUserHandler);
 
 router.patch("/api/user/:_id", findUserMiddleware, editUserHandler);
 router.get("/api/users", [], getPaginatedUsers);

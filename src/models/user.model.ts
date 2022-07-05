@@ -31,6 +31,13 @@ export interface Login {
   await TaskModel.deleteMany({ userId: user._id });
   next();
 })
+@pre<User>("findOneAndUpdate", async function (next) {
+  if (this._update?.password) {
+    this._update.password = await bcrypt.hash(this._update.password, 10);
+  } else {
+    next();
+  }
+})
 // @pre<User>("findOneAndUpdate", async function (next) {
 //   const _id = this.getQuery()?._id;
 
@@ -66,8 +73,14 @@ export class User {
   @prop({ required: true, minlength: 3, type: String })
   lastName!: string;
 
-  @prop({ required: true, default: "Unemployed", type: String })
+  @prop({ required: true, type: String })
   role!: string;
+
+  @prop({ required: true, type: String })
+  gender!: string;
+
+  @prop({ required: true, type: Date })
+  dateOfBirth!: Date;
 
   @prop({
     ref: () => Task,

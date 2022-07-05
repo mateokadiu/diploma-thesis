@@ -37,7 +37,6 @@ export async function getEmployeeTasksHandler(
   try {
     let tasks = await getTasks();
     if (tasks) tasks = tasks.filter((task) => task.to === params.email);
-    console.log(tasks);
     return res.status(200).send(tasks);
   } catch (e: any) {
     res.status(500).json({ message: e.message });

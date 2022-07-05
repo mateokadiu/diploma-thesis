@@ -7,7 +7,7 @@ import {
 
 const router: Router = express.Router();
 
-router.post("/api/signup", signupUserHandler);
+router.post("/api/user", signupUserHandler);
 
 router.post("/api/login", loginUserHandler);
 

@@ -18,10 +18,7 @@ export async function signupUser(
 
 export const changePassword = async (_id: string, password: string) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-
-    const hash = await bcrypt.hashSync(password, salt);
-    const user = await UserModel.updateOne({ _id }, { password: hash });
+    const user = await UserModel.findOneAndUpdate({ _id }, { password });
     return user;
   } catch (e: any) {
     throw { message: "Server is not responding!" };

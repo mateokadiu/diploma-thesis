@@ -21,14 +21,14 @@ export async function changePasswordHandler(
   { body, params }: Request,
   res: Response
 ) {
-  const user = await getUser(params._id);
+  const user = await getUser(params?._id);
 
   const validPassword =
-    user && (await bcrypt.compare(body.password, user!.password));
+    user && (await user.comparePasswords(user?.password, body?.password));
 
   if (validPassword) {
     const updated = await changePassword(params._id, body.newPassword);
-    if (updated.modifiedCount) {
+    if (updated?.email) {
       res.status(200).send({ message: "User password updated successfully!" });
     }
   } else {
