@@ -6,7 +6,7 @@ import {
   Ref,
   Severity,
 } from "@typegoose/typegoose";
-import UserModel, { User } from "./user.model";
+import { User } from "./user.model";
 
 export interface EventColor {
   primary: string;
