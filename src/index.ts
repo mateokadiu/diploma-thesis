@@ -22,6 +22,10 @@ const app: Application = express();
 app.use(json());
 app.use(cors());
 
+app.get("/", (req: any, res: any) => {
+  res.send("HELLO WORLD!");
+});
+
 mongoose.connect(
   `mongodb+srv://${config.get<string>("dbUsername")}:${config.get<string>(
     "dbPassword"
@@ -32,9 +36,10 @@ mongoose.connect(
     console.log("connected to db");
   }
 );
+
 app.use([authRouter, userRouter, taskRouter]);
 
-const port = config.get<number>("port");
+const port = 3000;
 
 app.listen(port, () => {
   console.log("server is running");

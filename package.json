@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node --transpile-only src/index.ts"
+    "start": "node src/index.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

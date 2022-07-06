@@ -30,7 +30,9 @@ export interface Login {
   next();
 })
 @pre<User>("findOneAndUpdate", async function (next) {
+  // @ts-ignore
   if (this._update?.password) {
+    // @ts-ignore
     this._update.password = await bcrypt.hash(this._update.password, 10);
   } else {
     next();

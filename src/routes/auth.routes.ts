@@ -7,10 +7,6 @@ import {
 
 const router: Router = express.Router();
 
-router.get("/", (res: any) => {
-  res.status(200).send({ message: "SERVER RUNNING" });
-});
-
 router.post("/api/user", signupUserHandler);
 
 router.post("/api/login", loginUserHandler);
