@@ -1,5 +1,6 @@
 <app-navbar>
   <div class="scroll-fix">
     <router-outlet></router-outlet>
+    <app-footer *ngIf="isLoggedIn$ | async"></app-footer>
   </div>
 </app-navbar>

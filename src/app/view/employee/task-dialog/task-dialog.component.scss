@@ -1,3 +1,32 @@
 .mat-dialog-actions {
   margin: 0 auto;
 }
+
+.task-deadline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+  }
+}
+
+.status-border {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.completed {
+  background-color: #077e8c;
+}
+.assigned {
+  background-color: #f29339;
+}
+.failed {
+  background-color: #d9512c;
+}

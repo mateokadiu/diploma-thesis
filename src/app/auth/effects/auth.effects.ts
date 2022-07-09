@@ -23,6 +23,10 @@ export class AuthEffects {
             'diploma-thesis.user',
             JSON.stringify(action?.user)
           );
+          localStorage.setItem(
+            'diploma-thesis.token',
+            JSON.stringify(action?.token)
+          );
           this.router.navigateByUrl('/view/home').then();
         })
       ),
@@ -40,6 +44,7 @@ export class AuthEffects {
         ofType(logout),
         tap((action) => {
           localStorage.removeItem('diploma-thesis.user');
+          localStorage.removeItem('diploma-thesis.token');
           this.router
             .navigateByUrl('/login')
             .then(() => this.openSnackBar('Logged Out Successfully!'));

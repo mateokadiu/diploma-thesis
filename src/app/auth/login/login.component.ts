@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         catchError((err) => {
           return throwError(() => err);
         }),
-        tap((user) => this.store.dispatch(login({ user }))),
+        tap(({ user, token }) => this.store.dispatch(login({ user, token }))),
         takeUntil(this.destroy$)
       )
       .subscribe({

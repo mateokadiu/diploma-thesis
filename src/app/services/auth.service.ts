@@ -12,9 +12,15 @@ export class AuthService {
   DB_URL = 'http://localhost:3000/api';
 
   login({ email, password }: User) {
-    return this.http.post<User>(`${this.DB_URL}/login`, { email, password });
+    return this.http.post<{ user: User; token: string }>(
+      `${this.DB_URL}/login`,
+      { email, password }
+    );
   }
 
+  logout() {
+    return this.http.get<any>(`${this.DB_URL}/logout`);
+  }
   signup(user: User) {
     return this.http.post<User>(`${this.DB_URL}/signup`, user);
   }

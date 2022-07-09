@@ -16,12 +16,37 @@
   ></app-tab>
 </div>
 
+<div class="paragraphs-container" *ngIf="user?.role == 'Admin'">
+  <div class="paragraph-element">
+    <h2>High quality</h2>
+    <p>
+      Internationalized and accessible components for everyone. Well tested to
+      ensure performance and reliability.
+    </p>
+    <p>Straightforward APIs with consistent cross platform behavior.</p>
+  </div>
+  <div class="paragraph-element">
+    <h2>Versatile</h2>
+
+    <p>
+      Provide tools that help developers build their own custom components with
+      common interaction patterns.
+    </p>
+    <p>Customizable within the bounds of the Material Design specification.</p>
+  </div>
+  <div class="paragraph-element">
+    <h2>Frictionless</h2>
+    <p>Built by the Angular team to integrate seamlessly with Angular.</p>
+    <p>Start from scratch or drop into your existing applications.</p>
+  </div>
+</div>
+
 <div class="manager-tabs-container" *ngIf="user?.role == 'Manager'">
   <mat-form-field class="tabs-selector" appearance="fill">
     <mat-label>Select a user</mat-label>
     <mat-select [(value)]="selectedEmail">
       <ng-container *ngFor="let u of users$ | async">
-        <mat-option [value]="u.email">
+        <mat-option class="option-selector" [value]="u.email">
           {{ u?.email }}
         </mat-option>
       </ng-container>

@@ -2,13 +2,39 @@
   <mat-tab label="Assigned">
     <ng-container *ngFor="let assign of assigned$">
       <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            {{ assign?.title }}
-          </mat-card-title>
-        </mat-card-header>
+        <mat-card-title>{{ assign?.title }}</mat-card-title>
+        <mat-card-subtitle> Assigned to: {{ assign?.to }}</mat-card-subtitle>
         <mat-card-content>
-          <div class="card-image assigned"></div>
+          <div>
+            Description:
+            <p>{{ assign?.description }}</p>
+          </div>
+          <div class="task-deadline">
+            <div class="task-deadline-wrapper">
+              Deadline:
+              <mat-card-subtitle>{{
+                assign?.end | date: "medium"
+              }}</mat-card-subtitle>
+            </div>
+            <div
+              *ngIf="assign?.status === 'Completed'"
+              class="status-border completed"
+            >
+              {{ assign?.status }}
+            </div>
+            <div
+              *ngIf="assign?.status === 'Assigned'"
+              class="status-border assigned"
+            >
+              {{ assign?.status }}
+            </div>
+            <div
+              *ngIf="assign?.status === 'Failed'"
+              class="status-border failed"
+            >
+              {{ assign?.status }}
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -16,13 +42,39 @@
   <mat-tab label="Completed">
     <ng-container *ngFor="let complete of completed$">
       <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            {{ complete?.title }}
-          </mat-card-title>
-        </mat-card-header>
+        <mat-card-title>{{ complete?.title }}</mat-card-title>
+        <mat-card-subtitle> Assigned to: {{ complete?.to }}</mat-card-subtitle>
         <mat-card-content>
-          <div class="card-image completed"></div>
+          <div>
+            Description:
+            <p>{{ complete?.description }}</p>
+          </div>
+          <div class="task-deadline">
+            <div class="task-deadline-wrapper">
+              Deadline:
+              <mat-card-subtitle>{{
+                complete?.end | date: "medium"
+              }}</mat-card-subtitle>
+            </div>
+            <div
+              *ngIf="complete?.status === 'Completed'"
+              class="status-border completed"
+            >
+              {{ complete?.status }}
+            </div>
+            <div
+              *ngIf="complete?.status === 'Assigned'"
+              class="status-border assigned"
+            >
+              {{ complete?.status }}
+            </div>
+            <div
+              *ngIf="complete?.status === 'Failed'"
+              class="status-border failed"
+            >
+              {{ complete?.status }}
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -30,14 +82,38 @@
   <mat-tab label="Failed">
     <ng-container *ngFor="let fail of failed$">
       <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            {{ fail?.title }}
-          </mat-card-title>
-        </mat-card-header>
+        <mat-card-title>{{ fail?.title }}</mat-card-title>
+        <mat-card-subtitle> Assigned to: {{ fail?.to }}</mat-card-subtitle>
         <mat-card-content>
-          <div class="card-image failed"></div>
+          <div>
+            Description:
+            <p>{{ fail?.description }}</p>
+          </div>
+          <div class="task-deadline">
+            <div class="task-deadline-wrapper">
+              Deadline:
+              <mat-card-subtitle>{{
+                fail?.end | date: "medium"
+              }}</mat-card-subtitle>
+            </div>
+            <div
+              *ngIf="fail?.status === 'Completed'"
+              class="status-border completed"
+            >
+              {{ fail?.status }}
+            </div>
+            <div
+              *ngIf="fail?.status === 'Assigned'"
+              class="status-border assigned"
+            >
+              {{ fail?.status }}
+            </div>
+            <div *ngIf="fail?.status === 'Failed'" class="status-border failed">
+              {{ fail?.status }}
+            </div>
+          </div>
         </mat-card-content>
-      </mat-card> </ng-container
-  ></mat-tab>
+      </mat-card>
+    </ng-container></mat-tab
+  >
 </mat-tab-group>

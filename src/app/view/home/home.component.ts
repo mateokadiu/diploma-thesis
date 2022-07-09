@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
 import {
   BehaviorSubject,
@@ -29,8 +30,11 @@ export class HomeComponent implements OnInit {
     private employeeTasksEntityService: EmployeeTaskEntityService,
     private managerTaskEntityService: ManagerTaskEntityService,
     private userEntityService: UserEntityService,
-    private store: Store<AuthState>
+    private store: Store<AuthState>,
+    private title: Title
   ) {
+    this.title.setTitle('Home');
+
     store
       .pipe(
         select(getLoggedUserData),
@@ -130,6 +134,13 @@ export class HomeComponent implements OnInit {
       map((data) => data.filter((task) => task.status === 'Failed')),
       takeUntil(this.destroy$)
     );
+
+    if (this.user.role == 'Manager') {
+      this.userEntityService.entities$
+        .pipe(tap((u) => (this.selectedEmail = u[0].email)))
+        .subscribe()
+        .unsubscribe();
+    }
   }
 
   ngOnDestroy() {

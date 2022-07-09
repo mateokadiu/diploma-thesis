@@ -32,6 +32,8 @@ export class ManagerTaskDataService
       .subscribe();
   }
 
+  token!: string;
+
   uId!: string;
 
   ngOnInit() {}

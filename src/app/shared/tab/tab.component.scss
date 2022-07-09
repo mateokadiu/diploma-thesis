@@ -6,6 +6,10 @@
 .mat-card {
   width: 60%;
   margin: 20px auto;
+
+  @media screen and (max-width: 598px) {
+    width: 85%;
+  }
 }
 
 .mat-card-header {
@@ -46,4 +50,37 @@
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.2;
+}
+
+.task-deadline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+  }
+}
+
+.task-deadline-wrapper {
+  align-self: flex-start;
+}
+
+.status-border {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.completed {
+  background-color: #077e8c;
+}
+.assigned {
+  background-color: #f29339;
+}
+.failed {
+  background-color: #d9512c;
 }

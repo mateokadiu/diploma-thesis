@@ -3,14 +3,55 @@
     #drawer
     class="sidenav"
     fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [attr.role]="(isHandset$ | async) || mobile ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) || mobile ? 'over' : 'side'"
+    [opened]="((isHandset$ | async) || mobile) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="login" routerLinkActive="active">Login</a>
-      <a mat-list-item routerLink="view/home" routerLinkActive="active">Home</a>
+      <a
+        mat-list-item
+        *ngIf="isLoggedOut$ | async"
+        routerLink="login"
+        routerLinkActive="active"
+        ><mat-icon>input</mat-icon> Login</a
+      >
+      <a
+        mat-list-item
+        *ngIf="isLoggedIn$ | async"
+        routerLink="view/home"
+        routerLinkActive="active"
+        ><mat-icon>home</mat-icon>Home</a
+      >
+      <a
+        mat-list-item
+        *ngIf="(isLoggedIn$ | async) && (isManager$ | async)"
+        routerLink="view/manager/task"
+        routerLinkActive="active"
+        ><mat-icon>home</mat-icon>Task</a
+      >
+      <a
+        mat-list-item
+        *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)"
+        routerLink="view/admin/user-management"
+        routerLinkActive="active"
+        ><mat-icon>home</mat-icon>User Management</a
+      >
+      <a
+        mat-list-item
+        *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)"
+        routerLink="view/admin/register-user"
+        routerLinkActive="active"
+        ><mat-icon>face</mat-icon>Create a User</a
+      >
+
+      <a
+        mat-list-item
+        *ngIf="(isLoggedIn$ | async) && (isEmployee$ | async)"
+        routerLink="view/employee/task"
+        routerLinkActive="active"
+        ><mat-icon>home</mat-icon>Employee Task</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,7 +62,7 @@
           aria-label="Toggle sidenav"
           mat-icon-button
           (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
+          *ngIf="(isHandset$ | async) || mobile"
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>

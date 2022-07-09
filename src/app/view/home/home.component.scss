@@ -2,6 +2,9 @@ header.docs-header-background {
   overflow: hidden;
   position: relative;
   height: 420px;
+  @media screen and (max-width: 600px) {
+    height: 350px;
+  }
 }
 
 header.docs-header-background::before {
@@ -16,6 +19,40 @@ header.docs-header-background::before {
   background-repeat: no-repeat;
   background-position: 80% 20px;
   opacity: 0.2;
+
+  @media screen and (max-width: 600px) {
+    content: none;
+  }
+}
+
+.paragraphs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  margin: 50px auto;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+  }
+}
+
+.paragraph-element {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+
+  & h2 {
+    font-size: 1.8rem;
+  }
+  & p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 100%;
+  }
 }
 
 .docs-header-section {
@@ -36,6 +73,9 @@ header.docs-header-background::before {
   letter-spacing: 2px;
   font-weight: 900;
   margin-bottom: 30px;
+  @media screen and (max-width: 600px) {
+    line-height: 1;
+  }
 }
 
 h2 {
@@ -53,6 +93,10 @@ h2 {
 }
 
 .employee-tab {
-  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
   margin: 0 auto;
 }

@@ -25,9 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, NotFoundComponent],
+  declarations: [AppComponent, NavbarComponent, NotFoundComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

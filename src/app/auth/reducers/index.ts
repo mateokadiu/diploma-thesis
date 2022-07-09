@@ -14,16 +14,18 @@ export const authFeatureKey = 'auth';
 
 export interface AuthState {
   user?: User;
+  token?: string;
 }
 
 const initialAuthState: AuthState = {
   user: undefined,
+  token: undefined,
 };
 
 export const authReducer = createReducer(
   initialAuthState,
   on(AuthActions.login, (state, action) => {
-    return { user: action.user };
+    return { user: action.user, token: action.token };
   }),
 
   on(AuthActions.logout, (state, action) => {

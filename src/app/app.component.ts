@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { login } from './auth/actions/auth-actions';
+import { isLoggedIn } from './auth/selectors/auth.selectors';
 import { AppState } from './reducers';
 
 @Component({
@@ -15,8 +16,13 @@ export class AppComponent {
 
   ngOnInit() {
     const user = localStorage.getItem('diploma-thesis.user');
-    if (user) {
-      this.store.dispatch(login({ user: JSON.parse(user) }));
+    const token = localStorage.getItem('diploma-thesis.token');
+    if (user && token) {
+      this.store.dispatch(
+        login({ user: JSON.parse(user), token: JSON.parse(token) })
+      );
     }
   }
+
+  isLoggedIn$ = this.store.pipe(select(isLoggedIn));
 }

@@ -105,32 +105,45 @@
   </ng-container>
   <ng-container *ngIf="mode === 'view'">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ dialogTitle }}</mat-card-title>
-        <mat-card-subtitle>{{
-          task?.title
-        }}</mat-card-subtitle></mat-card-header
-      >
-      <mat-card-content style="overflow-x: hidden">
-        <div class="card-description">
-          <div class="card-description-title">Description</div>
-          <div class="card-description-content">{{ task?.description }}</div>
+      <mat-card-title>{{ task?.title }}</mat-card-title>
+      <mat-card-subtitle> Assigned to: {{ task?.to }}</mat-card-subtitle>
+      <mat-card-content>
+        <div>
+          Description:
+          <p>{{ task?.description }}</p>
         </div>
-        <div class="card-dates">
-          <div style="font-weight: 300">
-            <span style="font-weight: 700">From:</span> {{ task?.start | date }}
+        <div class="task-deadline">
+          <div>
+            Deadline:
+            <mat-card-subtitle>{{
+              task?.end | date: "medium"
+            }}</mat-card-subtitle>
           </div>
-          <div style="font-weight: 300">
-            <span style="font-weight: 700">To:</span> {{ task?.end | date }}
+          <div
+            *ngIf="task?.status === 'Completed'"
+            class="status-border completed"
+          >
+            {{ task?.status }}
+          </div>
+          <div
+            *ngIf="task?.status === 'Assigned'"
+            class="status-border assigned"
+          >
+            {{ task?.status }}
+          </div>
+          <div *ngIf="task?.status === 'Failed'" class="status-border failed">
+            {{ task?.status }}
           </div>
         </div>
-        <div>{{ task?.to }}</div>
-        <div>{{ task?.from }}</div>
       </mat-card-content>
     </mat-card>
   </ng-container>
 
-  <ng-container *ngIf="mode === 'delete'"></ng-container>
+  <ng-container *ngIf="mode === 'delete'">
+    <div>
+      Are you sure for the deletion of task with title '{{ task?.title }}' ?
+    </div>
+  </ng-container>
 </mat-dialog-content>
 
 <mat-dialog-actions *ngIf="mode !== 'view'">

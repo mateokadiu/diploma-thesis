@@ -46,6 +46,8 @@ export class ManagementTableComponent implements OnInit {
     'first-name',
     'last-name',
     'role',
+    'gender',
+    'dateOfBirth',
     'edit',
     'delete',
   ];

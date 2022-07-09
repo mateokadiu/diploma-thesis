@@ -23,6 +23,14 @@
     )
   );
 
+  & .mat-sidenav .mat-toolbar {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+  }
+
+  & .paragraph-element {
+    color: #ffffffb3;
+  }
+
   & .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($my-accent) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
@@ -31,6 +39,19 @@
   & header.docs-header-background {
     background-color: mat.get-color-from-palette($my-primary) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  & footer {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+
+    & .footer-text:hover {
+      color: mat.get-color-from-palette($my-accent);
+    }
+  }
+
+  .footer-accent-name {
+    color: mat.get-color-from-palette($my-accent);
   }
 
   @include mat.all-component-colors($my-theme);
@@ -49,6 +70,10 @@
     )
   );
 
+  & .mat-sidenav .mat-toolbar {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+  }
+
   & .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($my-accent) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
@@ -57,6 +82,23 @@
   & header.docs-header-background {
     background-color: mat.get-color-from-palette($my-primary) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  .footer-accent-name {
+    color: mat.get-color-from-palette($my-accent);
+  }
+
+  & footer {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+
+    & .footer-text:hover {
+      color: mat.get-color-from-palette($my-accent);
+    }
+  }
+
+  & .paragraph-element {
+    color: #000;
   }
 
   @include mat.all-component-colors($my-theme);
@@ -75,6 +117,10 @@
     )
   );
 
+  & .mat-sidenav .mat-toolbar {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+  }
+
   & .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($my-accent) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
@@ -83,6 +129,23 @@
   & header.docs-header-background {
     background-color: mat.get-color-from-palette($my-primary) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  & footer {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+
+    & .footer-text:hover {
+      color: mat.get-color-from-palette($my-accent);
+    }
+  }
+
+  & .paragraph-element {
+    color: #000;
+  }
+
+  .footer-accent-name {
+    color: mat.get-color-from-palette($my-accent);
   }
 
   @include mat.all-component-colors($my-theme);
@@ -107,6 +170,14 @@
     )
   );
 
+  & .paragraph-element {
+    color: #ffffffb3;
+  }
+
+  & .mat-sidenav .mat-toolbar {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+  }
+
   & .mat-button-toggle-checked {
     background-color: mat.get-color-from-palette($my-accent) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
@@ -115,6 +186,19 @@
   & header.docs-header-background {
     background-color: mat.get-color-from-palette($my-primary) !important;
     color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+  }
+
+  & footer {
+    background-color: mat.get-color-from-palette($my-primary) !important;
+    color: mat.get-color-from-palette($my-accent, default-contrast) !important;
+
+    & .footer-text:hover {
+      color: mat.get-color-from-palette($my-accent);
+    }
+  }
+
+  .footer-accent-name {
+    color: mat.get-color-from-palette($my-accent);
   }
 
   @include mat.all-component-colors($my-theme);

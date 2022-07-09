@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { noop, Observable } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { noop, Observable, Subject, throwError } from 'rxjs';
+import { catchError, map, shareReplay, takeUntil, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../reducers';
 import {
@@ -26,6 +26,7 @@ import { User } from '../interfaces/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { defaultDialogConfig } from '../shared/default-dialog-config';
 import { UserCredentialsComponent } from '../shared/user-credentials/user-credentials.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -44,6 +45,7 @@ export class NavbarComponent implements OnInit {
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
+      tap(() => this.navFix()),
       shareReplay()
     );
 
@@ -51,7 +53,8 @@ export class NavbarComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private store: Store<AuthState>,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {
     const theme = localStorage.getItem('diploma-thesis.theme');
     if (theme) this.changeTheme(theme);
@@ -61,6 +64,8 @@ export class NavbarComponent implements OnInit {
       .pipe(tap((user) => (this.user = user)))
       .subscribe();
   }
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   user!: User;
 
@@ -93,6 +98,12 @@ export class NavbarComponent implements OnInit {
       ...dialogConfig,
       disableClose: false,
     });
+  }
+
+  mobile = false;
+
+  navFix() {
+    this.mobile = window.screen.width <= 940;
   }
 
   ngOnInit(): void {
@@ -173,6 +184,13 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.store.dispatch(logout());
+    this.authService
+      .logout()
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        tap(() => this.store.dispatch(logout())),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 }
