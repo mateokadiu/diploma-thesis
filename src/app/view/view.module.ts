@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from '../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { FilterStatePipe } from './pipes/filter-state.pipe';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [HomeComponent, FilterStatePipe],
   imports: [
@@ -29,6 +30,7 @@ import { FilterStatePipe } from './pipes/filter-state.pipe';
     ViewRoutingModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatCardModule,
     SharedModule,
   ],
   providers: [

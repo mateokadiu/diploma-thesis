@@ -43,7 +43,6 @@ export class UserDataService extends DefaultDataService<User> {
             );
           } else {
             return [];
-            // return data.filter((user) => user?._id !== this.userData?._id);
           }
         })
       );

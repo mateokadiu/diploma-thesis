@@ -16,6 +16,7 @@ import { AuthState } from 'src/app/auth/reducers';
 import { getLoggedUserData } from 'src/app/auth/selectors/auth.selectors';
 import { Task } from 'src/app/interfaces/task.interface';
 import { User } from 'src/app/interfaces/user.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { EmployeeTaskEntityService } from '../services/employee/employee-task-entity.service';
 import { ManagerTaskEntityService } from '../services/manager/manager-task-entity.service';
 import { UserEntityService } from '../services/user/user-entity.service';
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
     private employeeTasksEntityService: EmployeeTaskEntityService,
     private managerTaskEntityService: ManagerTaskEntityService,
     private userEntityService: UserEntityService,
+    private authService: AuthService,
     private store: Store<AuthState>,
     private title: Title
   ) {
@@ -94,6 +96,8 @@ export class HomeComponent implements OnInit {
 
   users$!: Observable<User[]>;
 
+  adminStats: any;
+
   selectedEmail!: string;
   stateSubject = new BehaviorSubject(this.selectedEmail);
 
@@ -140,6 +144,16 @@ export class HomeComponent implements OnInit {
         .pipe(tap((u) => (this.selectedEmail = u[0].email)))
         .subscribe()
         .unsubscribe();
+    }
+
+    if (this.user.role == 'Admin') {
+      this.authService
+        .getUserNumbers()
+        .pipe(
+          tap((stats) => (this.adminStats = stats)),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(console.log);
     }
   }
 

@@ -18,6 +18,10 @@ export class AuthService {
     );
   }
 
+  getUserNumbers() {
+    return this.http.get<any>(`${this.DB_URL}/users/numbers`);
+  }
+
   logout() {
     return this.http.get<any>(`${this.DB_URL}/logout`);
   }

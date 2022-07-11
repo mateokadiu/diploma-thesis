@@ -129,7 +129,7 @@ export class TaskManagementComponent implements OnInit {
   addEvent(): void {
     const dialogConfig = defaultDialogConfig();
     dialogConfig.data = {
-      dialogTitle: 'Create Course',
+      dialogTitle: 'Create Task',
       mode: 'create',
     };
     this.dialog.open(TaskDialogComponent, {

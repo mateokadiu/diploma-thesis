@@ -16,29 +16,39 @@
   ></app-tab>
 </div>
 
-<div class="paragraphs-container" *ngIf="user?.role == 'Admin'">
-  <div class="paragraph-element">
-    <h2>High quality</h2>
-    <p>
-      Internationalized and accessible components for everyone. Well tested to
-      ensure performance and reliability.
-    </p>
-    <p>Straightforward APIs with consistent cross platform behavior.</p>
-  </div>
-  <div class="paragraph-element">
-    <h2>Versatile</h2>
+<div class="cards-container" *ngIf="user?.role == 'Admin'">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Admins</mat-card-title>
+    </mat-card-header>
+    <mat-card-content
+      ><div class="number-of-users">
+        {{ adminStats?.adminNumber }}
+      </div></mat-card-content
+    >
+  </mat-card>
 
-    <p>
-      Provide tools that help developers build their own custom components with
-      common interaction patterns.
-    </p>
-    <p>Customizable within the bounds of the Material Design specification.</p>
-  </div>
-  <div class="paragraph-element">
-    <h2>Frictionless</h2>
-    <p>Built by the Angular team to integrate seamlessly with Angular.</p>
-    <p>Start from scratch or drop into your existing applications.</p>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Managers</mat-card-title>
+    </mat-card-header>
+    <mat-card-content
+      ><div class="number-of-users">
+        {{ adminStats?.managerNumber }}
+      </div></mat-card-content
+    >
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Employees</mat-card-title>
+    </mat-card-header>
+    <mat-card-content
+      ><div class="number-of-users">
+        {{ adminStats?.employeeNumber }}
+      </div></mat-card-content
+    >
+  </mat-card>
 </div>
 
 <div class="manager-tabs-container" *ngIf="user?.role == 'Manager'">

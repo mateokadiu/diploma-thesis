@@ -18,6 +18,10 @@ table {
   align-items: center;
   justify-content: center;
 
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
+
   & .mat-form-field {
     position: relative;
     width: 100%;
@@ -47,12 +51,20 @@ table {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
   margin: 50px auto 0 auto;
 }
 
 .selector-container {
   display: flex;
   width: 15%;
+
+  @media screen and (max-width: 600px) {
+    width: 40%;
+    margin-bottom: 30px;
+  }
 
   & .mat-form-field {
     width: 100%;

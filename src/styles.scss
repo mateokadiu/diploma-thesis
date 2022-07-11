@@ -48,9 +48,17 @@
     & .footer-text:hover {
       color: mat.get-color-from-palette($my-accent);
     }
+
+    & .footer-logo svg {
+      fill: #303030;
+    }
   }
 
-  .footer-accent-name {
+  & .nav-logo svg {
+    fill: #303030;
+  }
+
+  & .footer-accent-name {
     color: mat.get-color-from-palette($my-accent);
   }
 
@@ -95,6 +103,14 @@
     & .footer-text:hover {
       color: mat.get-color-from-palette($my-accent);
     }
+
+    & .footer-logo svg {
+      fill: #fff;
+    }
+  }
+
+  & .nav-logo svg {
+    fill: #fff;
   }
 
   & .paragraph-element {
@@ -138,14 +154,22 @@
     & .footer-text:hover {
       color: mat.get-color-from-palette($my-accent);
     }
+
+    & .footer-logo svg {
+      fill: #fff;
+    }
   }
 
   & .paragraph-element {
     color: #000;
   }
 
-  .footer-accent-name {
+  & .footer-accent-name {
     color: mat.get-color-from-palette($my-accent);
+  }
+
+  & .nav-logo svg {
+    fill: #fff;
   }
 
   @include mat.all-component-colors($my-theme);
@@ -195,9 +219,17 @@
     & .footer-text:hover {
       color: mat.get-color-from-palette($my-accent);
     }
+
+    & .footer-logo svg {
+      fill: #303030;
+    }
   }
 
-  .footer-accent-name {
+  & .nav-logo svg {
+    fill: #303030;
+  }
+
+  & .footer-accent-name {
     color: mat.get-color-from-palette($my-accent);
   }
 
