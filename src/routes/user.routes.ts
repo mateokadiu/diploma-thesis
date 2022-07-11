@@ -4,8 +4,13 @@ import {
   deleteUserHandler,
   editUserHandler,
   getPaginatedUsers,
+  getUserNumbers,
   getUsersHandler,
 } from "../controller/user.controller";
+import {
+  isAuthenticatedUser,
+  authorizeRoles,
+} from "../middleware/auth.middleware";
 // import { deserializeUser } from "../middleware/deserializeUser";
 import { findUserMiddleware } from "../middleware/findUser.middleware";
 // import { requireUser } from "../middleware/requireUser";
@@ -14,19 +19,13 @@ const router: Router = express.Router();
 
 // router.use(deserializeUser, requireUser);
 
-router.get("/api/users/:role/:email", [], getUsersHandler);
+router.route("/api/users/:role/:email").get([], getUsersHandler);
 
-router.delete("/api/user/:_id", findUserMiddleware, deleteUserHandler);
+router.route("/api/users/numbers").get(getUserNumbers);
 
-router.patch("/api/user/:_id", findUserMiddleware, editUserHandler);
-router.get("/api/users", [], getPaginatedUsers);
+router.route("/api/user/:_id").delete(findUserMiddleware, deleteUserHandler);
+
+router.route("/api/user/:_id").patch(findUserMiddleware, editUserHandler);
+router.route("/api/users").get([], getPaginatedUsers);
 
 export { router as userRouter };
-
-// async (req: Request, res: Response) => {
-//   const { email, password, confirmPassword } = req.body;
-
-//   const user = UserModel.build({ email, password, confirmPassword });
-//   await user.save();
-//   return res.status(201).send(user);
-// }

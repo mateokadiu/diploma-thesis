@@ -9,6 +9,9 @@ import {
 } from "@typegoose/typegoose";
 import bcrypt from "bcrypt";
 import TaskModel, { Task } from "./task.model";
+import jwt, { Secret } from "jsonwebtoken";
+import crypto from "crypto";
+import { omit } from "lodash";
 
 export interface Login {
   email: string;
@@ -38,22 +41,6 @@ export interface Login {
     next();
   }
 })
-// @pre<User>("findOneAndUpdate", async function (next) {
-//   const _id = this.getQuery()?._id;
-
-//   const email = this?.getUpdate()?.email;
-//   if (email) {
-//     const user = await UserModel.findOne({ _id });
-//     if (user?.role === "Employee") {
-//       await TaskModel.updateMany({ to: user?.email }, { to: email });
-//     } else if (user?.role === "Manager") {
-//       await TaskModel.updateMany({ from: user?.email }, { from: email });
-//     }
-//   }
-//   next();
-//   // if(user?.role === 'Manager')
-//   // await TaskModel.
-// })
 @modelOptions({
   schemaOptions: {
     // Add createdAt and updatedAt fields
@@ -82,6 +69,12 @@ export class User {
   @prop({ required: true, type: Date })
   dateOfBirth!: Date;
 
+  @prop({ required: false, type: String })
+  resetPasswordToken!: String;
+
+  @prop({ required: false, type: Date })
+  resetPasswordExpire!: Date;
+
   @prop({
     ref: () => Task,
     foreignField: "userId",
@@ -91,6 +84,27 @@ export class User {
 
   async comparePasswords(hashedPassword: string, candidatePassword: string) {
     return await bcrypt.compare(candidatePassword, hashedPassword);
+  }
+
+  async getJwtToken() {
+    return jwt.sign({ user: this }, process.env.JWT_SECRET as Secret, {
+      expiresIn: process.env.JWT_EXPIRES_TIME,
+    });
+  }
+
+  getResetPasswordToken() {
+    // Generate token
+    const resetToken = crypto.randomBytes(20).toString("hex");
+    this.resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex")
+      .toString();
+
+    this.resetPasswordExpire = (Date.now() + 30 * 60 * 1000) as unknown as Date;
+
+    return resetToken;
+    // Hash and set to resetPasswordToken
   }
 }
 
@@ -106,5 +120,7 @@ export interface UserDocument {
 }
 
 const UserModel = getModelForClass(User);
+
+//Return JWT token
 
 export default UserModel;

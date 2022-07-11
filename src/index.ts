@@ -7,6 +7,7 @@ import { userRouter } from "./routes/user.routes";
 import { taskRouter } from "./routes/task.routes";
 import { authRouter } from "./routes/auth.routes";
 import config from "config";
+import cookieParser from "cookie-parser";
 
 const app: Application = express();
 // app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -20,11 +21,8 @@ const app: Application = express();
 // });
 
 app.use(json());
+app.use(cookieParser());
 app.use(cors());
-
-app.get("/", (req: any, res: any) => {
-  res.send("HELLO WORLD!");
-});
 
 mongoose.connect(
   `mongodb+srv://${config.get<string>("dbUsername")}:${config.get<string>(

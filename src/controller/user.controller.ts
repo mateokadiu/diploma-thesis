@@ -30,6 +30,26 @@ export async function getPaginatedUsers(
   res.status(200).json(usersPage);
 }
 
+export async function getUserNumbers(req: any, res: any) {
+  try {
+    const users = await getUsers();
+    if (users) {
+      const employeeNumber = users?.filter(
+        (user) => user.role == "Employee"
+      ).length;
+
+      const managerNumber = users?.filter(
+        (user) => user.role == "Manager"
+      ).length;
+
+      const adminNumber = users?.filter((user) => user.role == "Admin").length;
+
+      res.status(200).send({ employeeNumber, managerNumber, adminNumber });
+    }
+  } catch (e: any) {
+    res.status(500).send({ message: e.message });
+  }
+}
 export async function deleteUserHandler(req: any, res: any) {
   try {
     await res?.user.remove();
