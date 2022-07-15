@@ -14,20 +14,28 @@ export const authFeatureKey = 'auth';
 
 export interface AuthState {
   user?: User;
-  token?: string;
+  tokens?: { accessToken: string; refreshToken: string };
 }
 
 const initialAuthState: AuthState = {
   user: undefined,
-  token: undefined,
+  tokens: undefined,
 };
 
 export const authReducer = createReducer(
   initialAuthState,
   on(AuthActions.login, (state, action) => {
-    return { user: action.user, token: action.token };
+    return { ...state, tokens: action.tokens };
   }),
-
+  on(AuthActions.logUserData, (state, action) => {
+    return { ...state, user: action.user };
+  }),
+  on(AuthActions.loggedUser, (state, action) => {
+    return { user: action.user, tokens: action.tokens };
+  }),
+  on(AuthActions.triggeredOnRefresh, (state, action) => {
+    return { user: action.user, tokens: action.tokens };
+  }),
   on(AuthActions.logout, (state, action) => {
     return { user: undefined };
   }),

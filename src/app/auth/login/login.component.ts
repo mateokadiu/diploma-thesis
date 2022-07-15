@@ -61,17 +61,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService
-      .login(this.loginForm.value)
+      .createSession(this.loginForm.value)
       .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        }),
-        tap(({ user, token }) => this.store.dispatch(login({ user, token }))),
-        takeUntil(this.destroy$)
+        catchError(({ error }) => throwError(() => error)),
+        tap((tokens) => this.store.dispatch(login({ tokens })))
       )
       .subscribe({
-        error: ({ error }) =>
-          this._snackBar.open(error.message, 'OK', { duration: 2000 }),
+        error: ({ text }) =>
+          this._snackBar.open(text, 'OK', { duration: 2000 }),
         complete: () =>
           this._snackBar.open('Logged in successfully!', 'OK', {
             duration: 2000,

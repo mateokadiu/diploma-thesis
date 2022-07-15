@@ -11,10 +11,26 @@ export class AuthService {
 
   DB_URL = 'http://localhost:3000/api';
 
-  login({ email, password }: User) {
-    return this.http.post<{ user: User; token: string }>(
-      `${this.DB_URL}/login`,
+  createSession({ email, password }: User) {
+    return this.http.post<{ accessToken: string; refreshToken: string }>(
+      `${this.DB_URL}/session`,
       { email, password }
+    );
+  }
+
+  getUser() {
+    return this.http.get<User>(`${this.DB_URL}/users/me`);
+  }
+
+  refreshSession({ email, password }: User, refreshToken: string) {
+    return this.http.post<{ accessToken: string }>(
+      `${this.DB_URL}/session/refresh`,
+      { email, password },
+      {
+        headers: {
+          'x-refresh': refreshToken,
+        },
+      }
     );
   }
 

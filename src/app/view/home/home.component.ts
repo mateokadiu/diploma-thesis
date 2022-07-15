@@ -1,19 +1,26 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
+import { fi } from 'date-fns/locale';
 import {
   BehaviorSubject,
   combineLatest,
   distinctUntilChanged,
+  interval,
   map,
   Observable,
   shareReplay,
   Subject,
   takeUntil,
   tap,
+  timer,
 } from 'rxjs';
+import { triggeredOnRefresh } from 'src/app/auth/actions/auth-actions';
 import { AuthState } from 'src/app/auth/reducers';
-import { getLoggedUserData } from 'src/app/auth/selectors/auth.selectors';
+import {
+  getLoggedUserData,
+  selectAuthState,
+} from 'src/app/auth/selectors/auth.selectors';
 import { Task } from 'src/app/interfaces/task.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';

@@ -7,4 +7,6 @@ export interface User {
   role: string;
   gender: string;
   dateOfBirth: Date;
+  exp?: number;
+  iat?: number;
 }

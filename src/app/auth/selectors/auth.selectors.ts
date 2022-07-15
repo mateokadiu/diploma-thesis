@@ -14,6 +14,11 @@ export const selectEmail = createSelector(
   (user) => user?.email as string
 );
 
+export const selectAccessToken = createSelector(
+  selectAuthState,
+  (authState) => authState.tokens?.accessToken
+);
+
 export const isLoggedIn = createSelector(
   selectAuthState,
   (authState) => !!authState.user

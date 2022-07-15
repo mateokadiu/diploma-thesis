@@ -21,14 +21,20 @@ import { MatMenuModule } from '@angular/material/menu';
 import { reducers, metaReducers } from './reducers';
 import { AuthModule } from './auth/auth.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FooterComponent } from './footer/footer.component';
+import { AuthInterceptor } from './services/authconfig.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, NotFoundComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    NotFoundComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,6 +63,13 @@ import { FooterComponent } from './footer/footer.component';
     StoreModule.forRoot(reducers, { metaReducers }),
     EntityDataModule.forRoot({}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
