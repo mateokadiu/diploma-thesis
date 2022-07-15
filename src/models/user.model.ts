@@ -1,11 +1,13 @@
 // import { Schema, model, Model, Document } from "mongoose";
 import {
+  DocumentType,
   getModelForClass,
   index,
   modelOptions,
   pre,
   prop,
   Ref,
+  Severity,
 } from "@typegoose/typegoose";
 import bcrypt from "bcrypt";
 import TaskModel, { Task } from "./task.model";
@@ -13,6 +15,13 @@ import jwt, { Secret } from "jsonwebtoken";
 import crypto from "crypto";
 import { omit } from "lodash";
 
+export const privateFields = [
+  "password",
+  "__v",
+  "verificationCode",
+  "passwordResetCode",
+  "verified",
+];
 export interface Login {
   email: string;
   password: string;
@@ -45,6 +54,9 @@ export interface Login {
   schemaOptions: {
     // Add createdAt and updatedAt fields
     timestamps: true,
+  },
+  options: {
+    allowMixed: Severity.ALLOW,
   },
 })
 export class User {
@@ -84,12 +96,6 @@ export class User {
 
   async comparePasswords(hashedPassword: string, candidatePassword: string) {
     return await bcrypt.compare(candidatePassword, hashedPassword);
-  }
-
-  async getJwtToken() {
-    return jwt.sign({ user: this }, process.env.JWT_SECRET as Secret, {
-      expiresIn: process.env.JWT_EXPIRES_TIME,
-    });
   }
 
   getResetPasswordToken() {

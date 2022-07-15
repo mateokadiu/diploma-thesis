@@ -1,5 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { omit } from "lodash";
+import { getCurrentUserHandler } from "../controller/auth.controller";
 import {
   deleteUserHandler,
   editUserHandler,
@@ -19,13 +20,27 @@ const router: Router = express.Router();
 
 // router.use(deserializeUser, requireUser);
 
-router.route("/api/users/:role/:email").get([], getUsersHandler);
+router
+  .route("/api/users/:role/:email")
+  .get(isAuthenticatedUser, [], getUsersHandler);
 
-router.route("/api/users/numbers").get(getUserNumbers);
+router
+  .route("/api/users/numbers")
+  .get(isAuthenticatedUser, authorizeRoles("Admin"), getUserNumbers);
 
-router.route("/api/user/:_id").delete(findUserMiddleware, deleteUserHandler);
+router
+  .route("/api/user/:_id")
+  .delete(
+    isAuthenticatedUser,
+    authorizeRoles("Admin"),
+    findUserMiddleware,
+    deleteUserHandler
+  );
 
 router.route("/api/user/:_id").patch(findUserMiddleware, editUserHandler);
-router.route("/api/users").get([], getPaginatedUsers);
+router
+  .route("/api/users")
+  .get(isAuthenticatedUser, authorizeRoles("Admin"), [], getPaginatedUsers);
+router.route("/api/users/me").get(getCurrentUserHandler);
 
 export { router as userRouter };

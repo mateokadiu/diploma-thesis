@@ -19,6 +19,14 @@ export const getUser = async (_id: string) => {
   }
 };
 
+export function findUserById(id: string) {
+  return UserModel.findById(id);
+}
+
+export function findUserByEmail(email: string) {
+  return UserModel.findOne({ email });
+}
+
 export const editUser = async (_id: string, data: any) => {
   try {
     const user = await UserModel.findOneAndUpdate(

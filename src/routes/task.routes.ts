@@ -7,7 +7,10 @@ import {
   getTaskHandler,
   getTasksHandler,
 } from "../controller/task.controller";
-import { isAuthenticatedUser } from "../middleware/auth.middleware";
+import {
+  authorizeRoles,
+  isAuthenticatedUser,
+} from "../middleware/auth.middleware";
 import { findTaskMiddleware } from "../middleware/findTask.middleware";
 const router: Router = express.Router();
 
