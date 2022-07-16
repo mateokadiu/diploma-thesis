@@ -33,7 +33,7 @@ export interface Login {
   const user = this;
   if (!user.isModified("password")) next();
 
-  // Hash password with costFactor of 12
+  // Hash password with costFactor of 10
   this.password = await bcrypt.hash(this.password, 10);
 })
 @pre<User>("remove", async function (next) {

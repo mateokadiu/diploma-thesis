@@ -15,7 +15,6 @@ import {
   getUser,
 } from "../service/user.service";
 import { verifyJwt } from "../utils/jwt";
-import { sendToken } from "../utils/jwtToken";
 import sendEmail from "../utils/sendEmail";
 
 import { get } from "lodash";
