@@ -28,25 +28,16 @@ export async function createSessionHandler(req: Request, res: Response) {
   if (!user) {
     return res.send(message);
   }
-
-  // if (!user.verified) {
-  //   return res.send("Please verify your email");
-  // }
-
   const isValid = await user.comparePasswords(user.password, password);
 
   if (!isValid) {
     return res.send(message);
   }
-
   // sign a access token
   const accessToken = signAccessToken(user);
-
   // sign a refresh token
   const refreshToken = await signRefreshToken({ userId: user._id });
-
   // send the tokens
-
   return res.send({
     accessToken,
     refreshToken,
@@ -69,7 +60,7 @@ export async function refreshAccessTokenHandler(req: Request, res: Response) {
   if (!session || !session.valid) {
     return res.status(401).send("Could not refresh access token");
   }
-
+ 
   const user = await findUserById(String(session.user));
 
   if (!user) {
@@ -151,9 +142,10 @@ export async function forgotPassword(req: any, res: any, next: any) {
 }
 
 export async function logoutUserHandler(req: any, res: Response, next: any) {
+  res.locals.user = null;
   res.status(200).send({ message: "Logged out successfully!" });
 }
-
+    
 export async function getCurrentUserHandler(req: Request, res: Response) {
   return res.send(res.locals.user);
 }

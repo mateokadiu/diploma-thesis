@@ -28,6 +28,7 @@ export interface Login {
 }
 
 @index({ email: 1 })
+//hash password on save
 @pre<User>("save", async function (next) {
   // Hash password if the password is new or was updated
   const user = this;
@@ -36,11 +37,13 @@ export interface Login {
   // Hash password with costFactor of 10
   this.password = await bcrypt.hash(this.password, 10);
 })
+//remove all manager tasks
 @pre<User>("remove", async function (next) {
   const user = this;
   await TaskModel.deleteMany({ userId: user._id });
   next();
 })
+//hash updated password
 @pre<User>("findOneAndUpdate", async function (next) {
   // @ts-ignore
   if (this._update?.password) {
@@ -50,6 +53,7 @@ export interface Login {
     next();
   }
 })
+//set model options
 @modelOptions({
   schemaOptions: {
     // Add createdAt and updatedAt fields
@@ -59,6 +63,8 @@ export interface Login {
     allowMixed: Severity.ALLOW,
   },
 })
+
+//define user class
 export class User {
   @prop({ required: true, unique: true, type: String })
   email!: string;
@@ -126,7 +132,5 @@ export interface UserDocument {
 }
 
 const UserModel = getModelForClass(User);
-
-//Return JWT token
 
 export default UserModel;

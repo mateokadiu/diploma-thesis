@@ -30,7 +30,7 @@ mongoose.connect(
 
 app.use([authRouter, userRouter, taskRouter]);
 
-const port = 3000;
+const port = config.get<number>("port");
 
 app.listen(port, () => {
   console.log("server is running");

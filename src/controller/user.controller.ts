@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import { omit } from "lodash";
 import { editUser, getUsers } from "../service/user.service";
 
@@ -16,18 +16,21 @@ export async function getPaginatedUsers(
   let users: any = await getUsers();
 
   const queryParams = query;
-  const filter = queryParams?.filter || "",
-    userId = queryParams?._id,
-    sortOrder = queryParams?.sortOrder,
+  const userId = queryParams?._id,
     pageNumber = parseInt(queryParams?.pageNumber as string),
     pageSize = parseInt(queryParams?.pageSize as string);
   const initialPos = pageNumber * pageSize;
+
+  if (initialPos > users.length) {
+    users = users.filter((u: any) => u?._id.toString() !== userId);
+    return res.status(200).json(users);
+  }
 
   const usersPage = users
     .filter((u: any) => u?._id.toString() !== userId)
     .slice(initialPos, initialPos + pageSize);
 
-  res.status(200).json(usersPage);
+  return res.status(200).json(usersPage);
 }
 
 export async function getUserNumbers(req: any, res: any) {
