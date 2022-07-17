@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
 import { delay, map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { userId } from 'src/app/auth/selectors/auth.selectors';
 import { User } from 'src/app/interfaces/user.interface';
 import { AppState } from 'src/app/reducers';
+import { UserEntityService } from 'src/app/services/user/user-entity.service';
 import { defaultDialogConfig } from 'src/app/shared/default-dialog-config';
-import { UserEntityService } from '../../services/user/user-entity.service';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
 
@@ -21,7 +22,8 @@ export class ManagementTableComponent implements OnInit {
     private userEntityService: UserEntityService,
     private store: Store<AppState>,
     private dialog: MatDialog,
-    private title: Title
+    private title: Title,
+    private _snackbar: MatSnackBar
   ) {
     title.setTitle('Admin - User Management');
 
@@ -63,6 +65,13 @@ export class ManagementTableComponent implements OnInit {
         _id: this.uId,
       })
       .pipe(
+        tap((users) => {
+          this.userEntityService.count$.forEach((n) => {
+            if (n != 5 && n == users.length) {
+              this._snackbar.open('No more users to load!', 'OK');
+            }
+          });
+        }),
         map((users) => users.filter((u) => u._id !== this.uId)),
         takeUntil(this.destroy$)
       )

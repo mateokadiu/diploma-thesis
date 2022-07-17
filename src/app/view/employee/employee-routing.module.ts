@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeTasksResolver } from 'src/app/view/services/employee/employee-tasks.resolver';
 import { TaskCalendarComponent } from './task-calendar/task-calendar.component';
 
 const routes: Routes = [

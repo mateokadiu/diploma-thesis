@@ -8,6 +8,7 @@ import {
   distinctUntilChanged,
   interval,
   map,
+  noop,
   Observable,
   shareReplay,
   Subject,
@@ -24,9 +25,9 @@ import {
 import { Task } from 'src/app/interfaces/task.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
-import { EmployeeTaskEntityService } from '../services/employee/employee-task-entity.service';
-import { ManagerTaskEntityService } from '../services/manager/manager-task-entity.service';
-import { UserEntityService } from '../services/user/user-entity.service';
+import { EmployeeTaskEntityService } from 'src/app/services/employee/employee-task-entity.service';
+import { ManagerTaskEntityService } from 'src/app/services/manager/manager-task-entity.service';
+import { UserEntityService } from 'src/app/services/user/user-entity.service';
 
 @Component({
   selector: 'app-home',
@@ -48,50 +49,6 @@ export class HomeComponent implements OnInit {
       .pipe(
         select(getLoggedUserData),
         tap((u) => (this.user = u)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-
-    employeeTasksEntityService.entities$
-      .pipe(
-        tap((tasks) =>
-          tasks.forEach(({ end, _id, status }) => {
-            if (
-              new Date(end).getTime() < new Date().getTime() &&
-              status === 'Assigned'
-            ) {
-              managerTaskEntityService
-                .update({
-                  _id,
-                  status: 'Failed',
-                })
-                .pipe(takeUntil(this.destroy$))
-                .subscribe();
-            }
-          })
-        ),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-
-    managerTaskEntityService.entities$
-      .pipe(
-        tap((tasks) =>
-          tasks.forEach(({ end, _id, status }) => {
-            if (
-              new Date(end).getTime() < new Date().getTime() &&
-              status === 'Assigned'
-            ) {
-              managerTaskEntityService
-                .update({
-                  _id,
-                  status: 'Failed',
-                })
-                .pipe(takeUntil(this.destroy$))
-                .subscribe();
-            }
-          })
-        ),
         takeUntil(this.destroy$)
       )
       .subscribe();
@@ -160,7 +117,7 @@ export class HomeComponent implements OnInit {
           tap((stats) => (this.adminStats = stats)),
           takeUntil(this.destroy$)
         )
-        .subscribe(console.log);
+        .subscribe(noop);
     }
   }
 

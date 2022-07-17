@@ -64,7 +64,6 @@ export class AuthEffects {
             'diploma-thesis.user',
             JSON.stringify(action?.user)
           );
-          this.router.navigateByUrl('/view/home').then();
         })
       ),
     { dispatch: false }

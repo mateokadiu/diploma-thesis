@@ -4,15 +4,23 @@
       <mat-button-toggle-group>
         <mat-button-toggle
           mwlCalendarPreviousView
+          [class.mat-button-toggle-checked]="selectedView == 0"
+          (click)="selectedView = 0"
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
           >Previous</mat-button-toggle
         >
-        <mat-button-toggle mwlCalendarToday [(viewDate)]="viewDate"
+        <mat-button-toggle
+          [class.mat-button-toggle-checked]="selectedView == 1"
+          (click)="selectedView = 1"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
           >Today</mat-button-toggle
         >
         <mat-button-toggle
+          [class.mat-button-toggle-checked]="selectedView == 2"
+          (click)="selectedView = 2"
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"

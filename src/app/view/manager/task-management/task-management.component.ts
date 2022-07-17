@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CalendarEventAction, CalendarEvent } from 'angular-calendar';
 import { Subject, takeUntil, tap, distinctUntilChanged } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
+import { ManagerTaskEntityService } from 'src/app/services/manager/manager-task-entity.service';
 import { defaultDialogConfig } from 'src/app/shared/default-dialog-config';
-import { ManagerTaskEntityService } from '../../services/manager/manager-task-entity.service';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 
 @Component({

@@ -8,7 +8,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { EntityDataModule } from '@ngrx/data';
+import {
+  EntityDataModule,
+  EntityDataService,
+  EntityDefinitionService,
+} from '@ngrx/data';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -24,9 +28,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { JwtModule } from '@auth0/angular-jwt';
 import { FooterComponent } from './footer/footer.component';
 import { AuthInterceptor } from './services/authconfig.interceptor';
+import { EmployeeTaskEntityService } from './services/employee/employee-task-entity.service';
+import { ManagerTaskDataService } from './services/manager/manager-tasks-data.service';
+import { UserDataService } from './services/user/user-data.service';
+import { EmployeeTaskDataService } from './services/employee/employee-tasks-data.service';
+import { entityMetadataMap } from './entity-metadata-map';
+import { ManagerTaskEntityService } from './services/manager/manager-task-entity.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +79,27 @@ import { AuthInterceptor } from './services/authconfig.interceptor';
       useClass: AuthInterceptor,
       multi: true,
     },
+    EmployeeTaskEntityService,
+    ManagerTaskDataService,
+    UserDataService,
+    EmployeeTaskDataService,
+    ManagerTaskEntityService,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(
+    private eds: EntityDefinitionService,
+    private entityDataService: EntityDataService,
+    private managerTasksDataService: ManagerTaskDataService,
+    private usersDataService: UserDataService,
+    private employeeTasksDataService: EmployeeTaskDataService
+  ) {
+    eds.registerMetadataMap(entityMetadataMap);
+    entityDataService.registerServices({
+      Manager: managerTasksDataService,
+      User: usersDataService,
+      Employee: employeeTasksDataService,
+    });
+  }
+}

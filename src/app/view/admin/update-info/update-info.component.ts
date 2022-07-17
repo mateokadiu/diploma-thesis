@@ -9,8 +9,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Subject, takeUntil, throwError } from 'rxjs';
 import { User } from 'src/app/interfaces/user.interface';
+import { UserEntityService } from 'src/app/services/user/user-entity.service';
 import { MatchPassword } from 'src/app/validators/match-password.validator';
-import { UserEntityService } from '../../services/user/user-entity.service';
 
 @Component({
   selector: 'app-update-info',

@@ -27,8 +27,8 @@ import {
 } from 'src/app/auth/selectors/auth.selectors';
 import { Task } from 'src/app/interfaces/task.interface';
 import { User } from 'src/app/interfaces/user.interface';
-import { ManagerTaskEntityService } from '../../services/manager/manager-task-entity.service';
-import { UserEntityService } from '../../services/user/user-entity.service';
+import { ManagerTaskEntityService } from 'src/app/services/manager/manager-task-entity.service';
+import { UserEntityService } from 'src/app/services/user/user-entity.service';
 
 @Component({
   selector: 'app-task-dialog',

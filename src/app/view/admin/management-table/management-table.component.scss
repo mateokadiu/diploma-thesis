@@ -4,10 +4,12 @@ table {
 }
 
 .table-wrapper {
-  margin: 50px auto;
+  margin: 2.5% auto;
   width: 90%;
+  height: 60%;
+  overflow-y: scroll;
   @media screen and (max-width: 1000px) {
-    overflow-x: scroll;
+    overflow: scroll;
   }
 }
 

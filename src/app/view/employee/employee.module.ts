@@ -8,9 +8,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { EmployeeTasksResolver } from '../services/employee/employee-tasks.resolver';
-import { EmployeeTaskDataService } from '../services/employee/employee-tasks-data.service';
-import { EmployeeTaskEntityService } from '../services/employee/employee-task-entity.service';
+import { EmployeeTasksResolver } from 'src/app/services/employee/employee-tasks.resolver';
+import { EmployeeTaskDataService } from 'src/app/services/employee/employee-tasks-data.service';
+import { EmployeeTaskEntityService } from 'src/app/services/employee/employee-task-entity.service';
 
 @NgModule({
   declarations: [TaskCalendarComponent, TaskDialogComponent],

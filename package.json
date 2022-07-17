@@ -1,5 +1,5 @@
 {
-  "name": "task-connect",
+  "name": "frontend-server",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -25,7 +25,6 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-    "@auth0/angular-jwt": "^5.0.2",
     "@compodoc/compodoc": "^1.1.19",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ngrx/data": "^13.2.0",

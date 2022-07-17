@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { catchError, Subject, takeUntil, throwError } from 'rxjs';
+import { UserEntityService } from 'src/app/services/user/user-entity.service';
 import { MatchPassword } from 'src/app/validators/match-password.validator';
-import { UserEntityService } from '../../services/user/user-entity.service';
 
 @Component({
   selector: 'app-register-user',
@@ -17,6 +18,8 @@ import { UserEntityService } from '../../services/user/user-entity.service';
   styleUrls: ['./register-user.component.scss'],
 })
 export class RegisterUserComponent implements OnInit {
+  @ViewChild('form') from!: FormGroupDirective;
+
   signupForm: FormGroup;
 
   hidePassword = true;
@@ -26,11 +29,9 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    // private store: Store<AppState>,
     private title: Title,
     private matchPassword: MatchPassword,
     private userEntityService: UserEntityService,
-    // private authService: AuthService,
     private _snackBar: MatSnackBar
   ) {
     title.setTitle('Admin - Create User');
@@ -71,21 +72,12 @@ export class RegisterUserComponent implements OnInit {
       )
       .subscribe({
         error: ({ error }) => this._snackBar.open(error.error.message, 'OK'),
-        complete: () => this._snackBar.open('User created successfully!', 'OK'),
+        complete: () => {
+          this.signupForm.reset();
+          this.from.resetForm();
+          this._snackBar.open('User created successfully!', 'OK');
+        },
       });
-    // this.authService
-    //   .signup(this.signupForm.value)
-    //   .pipe(
-    //     catchError((err) => {
-    //       return throwError(() => err);
-    //     }),
-    //     // tap((user) => this.store.dispatch(signup({ user }))),
-    //     takeUntil(this.destroy$)
-    //   )
-    //   .subscribe({
-    // error: ({ error }) => this._snackBar.open(error.message, 'OK'),
-    // complete: () => this._snackBar.open('Signed up successfully!', 'OK'),
-    //   });
   }
 
   ngOnInit(): void {}

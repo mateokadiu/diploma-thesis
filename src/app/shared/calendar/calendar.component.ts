@@ -20,6 +20,7 @@ export class CalendarComponent implements OnInit {
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+  selectedView = 1;
 
   modalData!: {
     action: string;
