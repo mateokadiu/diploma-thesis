@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "npx ts-node-dev src/index.ts",
+    "start": "ts-node src/index.ts",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\""
   },
   "keywords": [],
@@ -27,6 +27,8 @@
   "dependencies": {
     "@typegoose/typegoose": "^9.9.0",
     "bcrypt": "^5.0.1",
+    "ts-node": "^10.9.0",
+    "typescript": "^4.7.0",
     "body-parser": "^1.20.0",
     "config": "^3.3.7",
     "cookie-parser": "^1.4.6",
