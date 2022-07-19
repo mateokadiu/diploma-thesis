@@ -2,7 +2,6 @@ import express, { Router } from "express";
 import {
   changePasswordHandler,
   createSessionHandler,
-  forgotPassword,
   logoutUserHandler,
   refreshAccessTokenHandler,
   signupUserHandler,
@@ -19,8 +18,6 @@ router
 router.route("/api/logout").get(requireUser, logoutUserHandler);
 
 router.post("/api/session/refresh", refreshAccessTokenHandler);
-
-router.route("/api/password/forgot").post(requireUser, forgotPassword);
 
 router
   .route("/api/change-password/:_id")

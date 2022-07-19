@@ -11,9 +11,6 @@ import {
 } from "@typegoose/typegoose";
 import bcrypt from "bcrypt";
 import TaskModel, { Task } from "./task.model";
-import jwt, { Secret } from "jsonwebtoken";
-import crypto from "crypto";
-import { omit } from "lodash";
 
 export const privateFields = [
   "password",
@@ -87,12 +84,6 @@ export class User {
   @prop({ required: true, type: Date })
   dateOfBirth!: Date;
 
-  @prop({ required: false, type: String })
-  resetPasswordToken!: String;
-
-  @prop({ required: false, type: Date })
-  resetPasswordExpire!: Date;
-
   @prop({
     ref: () => Task,
     foreignField: "userId",
@@ -103,21 +94,6 @@ export class User {
   async comparePasswords(hashedPassword: string, candidatePassword: string) {
     return await bcrypt.compare(candidatePassword, hashedPassword);
   }
-
-  getResetPasswordToken() {
-    // Generate token
-    const resetToken = crypto.randomBytes(20).toString("hex");
-    this.resetPasswordToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex")
-      .toString();
-
-    this.resetPasswordExpire = (Date.now() + 30 * 60 * 1000) as unknown as Date;
-
-    return resetToken;
-    // Hash and set to resetPasswordToken
-  }
 }
 
 export interface UserDocument {
@@ -126,6 +102,8 @@ export interface UserDocument {
   firstName: string;
   lastName: string;
   role: string;
+  dateOfBirth: Date;
+  gender: string;
   tasks?: Ref<Task>[];
   createdAt: Date;
   updatedAt: Date;

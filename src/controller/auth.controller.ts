@@ -15,7 +15,6 @@ import {
   getUser,
 } from "../service/user.service";
 import { verifyJwt } from "../utils/jwt";
-import sendEmail from "../utils/sendEmail";
 
 import { get } from "lodash";
 
@@ -60,7 +59,7 @@ export async function refreshAccessTokenHandler(req: Request, res: Response) {
   if (!session || !session.valid) {
     return res.status(401).send("Could not refresh access token");
   }
- 
+
   const user = await findUserById(String(session.user));
 
   if (!user) {
@@ -103,49 +102,11 @@ export async function changePasswordHandler(
   }
 }
 
-//Forgot password => /api/password/forgot
-export async function forgotPassword(req: any, res: any, next: any) {
-  const user = await UserModel.findOne({ email: req.body.email });
-
-  if (!user) {
-    return res.status(404).send({ message: "User not found with this email!" });
-  }
-  // Get reset token
-  const resetToken = user.getResetPasswordToken();
-  await user.save({ validateBeforeSave: false });
-
-  // Create rest password url
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/password/reset/${resetToken}`;
-
-  const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf not have requested this email, then ignore it.`;
-
-  try {
-    await sendEmail({
-      email: user.email,
-      subject: "Task Organizer Password Recovery",
-      message,
-    });
-
-    res.status(200).json({ message: `Email sent to: ${user.email}` });
-  } catch (error: any) {
-    //@ts-ignore
-    user.resetPasswordToken = undefined;
-    //@ts-ignore
-    user.resetPasswordExpire = undefined;
-
-    await user.save({ validateBeforeSave: false });
-
-    return res.status(500).send({ message: error.message });
-  }
-}
-
 export async function logoutUserHandler(req: any, res: Response, next: any) {
   res.locals.user = null;
   res.status(200).send({ message: "Logged out successfully!" });
 }
-    
+
 export async function getCurrentUserHandler(req: Request, res: Response) {
   return res.send(res.locals.user);
 }
