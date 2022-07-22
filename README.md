@@ -20,3 +20,7 @@ Password: Employee1234@ <br/>
   <br/>
 [Frontend Link](https://diploma-thesis-frontend.herokuapp.com/login) <br />
 [Backend Link (Unauthorized by JWT)](https://diploma-thesis-backend.herokuapp.com/api/users)
+
+
+## NOTE
+MongoDB is connected with an atlas server. You can use your own Atlas account. To do that visit [MongoDB](https://www.mongodb.com/atlas/database) for more information.
